@@ -37,3 +37,20 @@
 @import "vendor/font-awesome/font-awesome";
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
+// @import "minimal-mistakes";
+
+html {
+  font-size: 12px; // change to whatever
+
+  @include breakpoint($medium) {
+    font-size: 14px; // change to whatever
+  }
+
+  @include breakpoint($large) {
+    font-size: 16px; // change to whatever
+  }
+
+  @include breakpoint($x-large) {
+    font-size: 18px; // change to whatever
+  }
+}

@@ -1,8 +1,8 @@
 ---
 layout: single
-permalink: /terms/
-title: "Terms and Privacy Policy"
-modified: 2016-10-01
+permalink: /experience/
+title: "Professional Experience"
+modified: 2019-10-01
 ---
 
 1. **Acceptance The Use Of [Mahaveer's Machine Learning Page](https://mahaveer0suthar.github.io/) Terms and Conditions**   

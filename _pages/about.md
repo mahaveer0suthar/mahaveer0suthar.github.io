@@ -8,7 +8,6 @@ excerpt: "All about me."
 Hi there, I'm Mahaveer.
 I am a Senior Deep Learning Engineer at a Geo-spatial AI Startup, 3+ year experience.
 
-
 Expertise in following :
 
 - Python, PrTorch, Tensorflow

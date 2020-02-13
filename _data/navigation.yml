@@ -1,17 +1,16 @@
 # main links links
 main:
+  - title: "About"
+    url: /about/
+
+  - title: "Professional Experience"
+    url: /experience/
+
   - title: "Tutorials"
     url: https://mahaveer0suthar.github.io/tutorials/
     
   - title: "Projects"
     url: https://mahaveer0suthar.github.io/portfolio/
-    
-  - title: "About"
-    url: /about/
-
-  - title: "Terms and Privacy Policy"
-    url: /terms/
-
 posts:
   - title: Most Popular
     children:
