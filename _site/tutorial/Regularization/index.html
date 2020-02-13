@@ -1,0 +1,902 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 9: Regularization - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 9: Regularization">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/">
+
+
+
+  <meta property="og:description" content="Welcome back to my 9th tutorial on Machine Learning! I have been kept busy in last weekends, struggling in getting my desktop ready for Deep Learning. You may consider giving that post a look if you are planning to build your own “Monster” too: Building up my own machine for Deep Learning.">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/mahaveer0suthar.github.io/images/tutorials/regularization/reg_graph.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-31T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="active">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 9: Regularization">
+    <meta itemprop="description" content="Welcome back to my 9th tutorial on Machine Learning! I have been kept busy in last weekends, struggling in getting my desktop ready for Deep Learning. You may consider giving that post a look if you are planning to build your own “Monster” too: Building up my own machine for Deep Learning.">
+    <meta itemprop="datePublished" content="October 31, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 9: Regularization
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  10 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Welcome back to my 9th tutorial on Machine Learning! I have been kept busy in last weekends, struggling in getting my desktop ready for Deep Learning. You may consider giving that post a look if you are planning to build your own “Monster” too: <a href="https://mahaveer0suthar.github.io/project/Building-Desktop-For-Deep-Learning/" target="_blank">Building up my own machine for Deep Learning</a>.</p>
+
+<p>Of course I got a lot to tell you about things I’ve been doing with my new desktop. But it will be a little bit selfish of mine and unfair to all of you if I let dust cover my Machine Learning tutorial series. So let’s say, I’m back on track. And today, I will talk about <strong>Regularization</strong>, a technique to deal with Overfitting problem. You may still remember that I mentioned eariler in previous posts, Overfitting is a big headache in all Machine Learning problems. Beside Cross Validation that I told you before, <strong>Regularization</strong> is a must-know technique that you will nearly apply in all of your Machine Learning problems. Furthermore, applying <strong>Regularization</strong> is a default setting in all algorithms provided by <em>scikit-learn</em> library.</p>
+
+<p>And I’m not going to waste any minute of yours. Let’s go straight into the most likely asked question: What is Regularization?</p>
+
+<p>When we hear the word <strong>Regularization</strong> without anything else related to Machine Learning, we all understand that Regularization is the process of regularizing something, or the process in which something is regularized. The problem is: what is exactly <em>something</em>. In terms of Machine Learning, we talk about learning algorithms or models, and what is actually inside the algorithms or models? That’s the set of parameters. In short, <strong>Regularization</strong> in Machine Learning is the process of regularizing the parameters.</p>
+
+<p>After knowing that Regularization is actually to regularize our parameters, then you may wonder: Why regularizing the parameters help prevent Overfitting? Let’s consider the graph that I had prepared for this tutorial. A picture is worth a thousand words, right?</p>
+
+<p><img src="/images/tutorials/regularization/reg_graph.png" alt="reg_graph" /></p>
+
+<p>As you can see in the graph I have just shown you, we got two functions represented by a green curve and a blue curve respectively. Both curve fit those red points so well that we can consider they both incur zero loss. And if you followed all my previous tutorials, you would be able to point out that the green curve is likely to overfit the data. Yeah, you are totally right. But have you ever wondered why the green curve (or any curve which is similar to it) is overfitting the data?</p>
+
+<p>To understand that in a more mathematical way, let’s consider the two functions that I used to draw the graph above:</p>
+
+<p>The green curve:</p>
+
+<script type="math/tex; mode=display">h_1(x)=-x^4+7x^3-5x^2-31x+30</script>
+
+<p>The blue curve:</p>
+
+<script type="math/tex; mode=display">h_2(x)=\frac{x^4}{5}-\frac{7x^3}{5}+x^2+\frac{31x}{5}-6</script>
+
+<p>Does it sound similar to you? I once told you about one way to improve the performance of Linear Regression model, that is adding polynomial features. You can refer it here: <a href="https://mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" target="_blank">Underfitting and Overfitting Problems</a>. You knew that by adding more features, we will have a more well learned model which can fit our data far better. But everything has its drawback, if we add so many features, we will be purnished with Overfitting. That was what I told you in the earlier tutorial. Not so hard to recall, right?</p>
+
+<p>If you look at each function’s equation, you will find that the green curve has larger coefficients, and that’s the main caution of Overfitting. As I mentioned before, Overfitting can be interpreted that our model fits the dataset so well, which it seems to memorize the data we showed rather than actually learn from it. Intuitively, having large coefficients can be seen as an evidence of memorizing the data. For example, we got some noises in our training dataset, where the data’s magnitude is far difference than the others, those noises will cause our model to put more weight into the coefficient of higher degree, and what we received is a model that overfits our training data!</p>
+
+<p>Some of you may think, if adding so many features causes Overfitting, than why don’t we just stop adding features when we got an acceptable model? But think about that this way. If your customer or your boss wants a learned model with \(95%\) accuracy, but you can’t achieve that result without adding some more features, which results in overfitting the data. What will you do in the next step?</p>
+
+<p>Or think about it in one more other way. You are facing a problem where you are provided with a large dataset, which each of them contains a great deal of features. You don’t know which features to drop, and even worse if it turns out that every feature is fairly informative, which means that dropping some features will likely ruin the algorithm’s performance. What do you plan to do next?</p>
+
+<h3 id="the-regularization-term">The regularization term</h3>
+
+<p>Therefore, it’s not always a good idea to drop some features just to prevent Overfitting. And as you saw in the example above, it requires further analysis to know whether you can remove some less informative features. So, it’s a good practice that you use all features to build your first model in the beginning. And <strong>regularization</strong> comes out as a solution. To make it more clear for you, let’s consider our MSE cost function:</p>
+
+<script type="math/tex; mode=display">J = \frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2</script>
+
+<p>I once introduced the MSE cost function before in <a href="https://mahaveer0suthar.github.io/tutorial/Linear-Regression/" target="_blank">Logistic Regression</a> tutorial. And as you know, the objective of learning is to minimize that MSE function. It means that our parameters can be updated in anyway, just to lower the MSE value. And as I told you above, the larger our parameters become, the higher chance our Model overfits the data. So the question is: can we not only minimize the cost function, but also restrict the parameters not to become too large? The answer is: we <strong>CAN</strong>, by adding the regularization term like below:</p>
+
+<script type="math/tex; mode=display">J = \frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n\theta_j^2</script>
+
+<p>, where \(\lambda\) is a constant to control the value of regularization term, \(n\) is the number of the features.</p>
+
+<p>Take a look at our new cost function after adding the regularization term. What the regularization term does is to penalize large parameters. Obviously, minimize the cost function consists of minimizing both terms in the right: the MSE term and the regularization term. So each time some parameter is updated to become significantly large, it will increase the value of the cost function by the regularization term, and as a result, it will be penalized and updated to a small value.</p>
+
+<p>Also note that we only compute the regularization term with the weights only, DON’T include the bias in the regularization term! You may ask why? Well, we can re-write our activation function like below (in case of polynomial function):</p>
+
+<script type="math/tex; mode=display">h_\theta(X)=\theta_0X^0+\theta_1X+\theta_2X^2+\dots+\theta_nX^n</script>
+
+<p>As you can see, we can think that the bias term goes with the \(X^0\) term, which means that it doesn’t affect to the form of our function, so include the bias term into the regularization term doesn’t make any sense.</p>
+
+<p>With the new added regularization term, obviously we have to make some change to the way we update the parameters too. But it’s not a big deal at all, just take all the partial derivatives and we will achieve the result below very easily:</p>
+
+<ul>
+  <li>For weights (\( \theta_1, \ldots, \theta_n\))</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_j}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_j^{(i)}+\frac{\lambda}{m}\theta_j</script>
+
+<ul>
+  <li>For bias (\( \theta_0 \)) it remains unchanged:</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_0}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)})</script>
+
+<p>Next, let’s put things together to see how the parameters are updated after adding regularization term:</p>
+
+<script type="math/tex; mode=display">\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\theta_n\end{bmatrix}=\begin{bmatrix}\theta_0\\\theta_1(1-\alpha\frac{\lambda}{m})\\\vdots\\\theta_n(1-\alpha\frac{\lambda}{m})\end{bmatrix}-\frac{\alpha}{m}\begin{bmatrix}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)})\\\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_1^{(i)}\\\vdots\\\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_n^{(i)}\end{bmatrix}</script>
+
+<p>That’s it. All we have to change is just adding the factor \((1-\frac{\lambda}{m})\) to the parameter when updating. You can prove the result above yourselves as an assignment. It’s very easy, but I recommend you do it yourselves to become more familiar with those mathematical terms like the Chain Rule or partial derivatives, which you will use a lot in the next tutorials.</p>
+
+<h3 id="more-about-regularization">More about regularization</h3>
+
+<p>Above I have shown you about adding the regularization term in our MSE function, and how to apply regularization in updating parameters, too. But it doesn’t mean that when applying regularization, you always stick to the term I have shown you. In fact, it’s just one among many forms of regularization. It’s just like the way we have many options for the cost function (or you can call it the loss function), we have MSE function, we have log-likelihood cost function, etc. To a particular problem, there will always be more than one approach, and each one will likely work best in a particular set of conditions.</p>
+
+<p>Below I will introduce to you the two which are mostly used in real world projects:</p>
+
+<ul>
+  <li>L2 Regularization:</li>
+</ul>
+
+<script type="math/tex; mode=display">J = \frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2+\frac{\lambda}{2m}\sum_{j=1}^n(\theta_j^2)</script>
+
+<p>This is actually the one I have shown above. It’s also easy to remember: L2 means degree \(2\) regularization term. Before talking any further, let’s consider the other one first:</p>
+
+<ul>
+  <li>L1 Regularization:</li>
+</ul>
+
+<script type="math/tex; mode=display">J = \frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2+\frac{\lambda}{m}\sum_{j=1}^n|\theta_j|</script>
+
+<p>Another form of regularization, called the L1 Regularization, looks like above. As you can see, instead of computing mean value of squares of the parameters as L2 Regularization does, what L1 Regularization does is to compute the mean magnitude of the parameters. Also note that in L1 Regularization term, we multiply the sum with a fraction of \(\frac{\lambda}{m}\), not \(\frac{\lambda}{2m}\). Remember that the term \(\frac{\lambda}{2m}\) helps vanish the \(2\) factor in the derivative of polynomial of degree 2. So I hope you won’t be confused which one to use.</p>
+
+<p>Looking at two cost functions above, adding L1 Regularization term or L2 Regularization term have nearly the same effect, that is to penalize large parameters. As a result, we end up with a learned model with all parameters being kept small, so that our model won’t depend on some particular parameters, thus less likely to overfit.</p>
+
+<p>To understand how the two terms differ from each other, let’s see how they affect the parameter update process:</p>
+
+<ul>
+  <li>L2 Regularization:</li>
+</ul>
+
+<script type="math/tex; mode=display">\theta_j = \theta_j-\frac{\alpha}{m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)}).X_j^{(i)}-\alpha\frac{\lambda}{m}\theta_j=(1-\alpha\frac{\lambda}{m})\theta_j-\frac{\alpha}{m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)}).X_j^{(i)}</script>
+
+<p>To make it simple, I just computed for one parameter \(\theta_j\). As you can see, when applying regularization, we have the new \((1-\alpha\frac{\lambda}{m})\) factor. What does it affect the update for \(\theta_j\) anyway? After each learning iteration, \(\theta_j\) decreases by an amount of \(\alpha\frac{\lambda}{m}\), which means that L2 Regularization tends to shink it by an amount proportional to \(\theta_j\). The larger \(\theta_j\) becomes, the more it will shrink. Now, what it’s like in the case of L1 Regularization:</p>
+
+<ul>
+  <li>L1 Regularization:</li>
+</ul>
+
+<script type="math/tex; mode=display">\theta_j = \theta_j-\alpha\frac{\lambda}{m}sign(\theta_j)-\frac{\alpha}{m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)}).X_j^{(i)}</script>
+
+<p>When we use L1 Regularization, our parameters shrink in a different way. Because \(sign(\theta_j)\) can only be either \(-1\) or \(1\), \(\theta_j\) now shrinks by a constant amount, and it tends to move toward zero. This makes the update process different from what we saw in L2 Regularization. Therefore, we can easily see that L1 Regularization tends to penalize small parameters more than L2 Regularization does. In short:</p>
+
+<ul>
+  <li>If \(\theta_j\) is large, L2 Regularization shinks \(\theta_j\) more than L1 Regularization does.</li>
+  <li>If \(\theta_j\) is small, L1 Regularization shinks \(\theta_j\) more than L2 Regularization does.</li>
+</ul>
+
+<h3 id="last-but-not-least">Last, but not least…</h3>
+
+<p>Above I have just shown you two mostly applied forms of regularization, and how each of them affect the learning process. The last thing I want to tell you in this post is about the constant \(\lambda\). As I mentioned earlier, \(\lambda\) controls how much we want to regularize our parameters. But what is really behind this? Let’s consider the two scenarios below:</p>
+
+<ul>
+  <li>\(\lambda\) is very small (nearly zero):</li>
+</ul>
+
+<p>When \(\lambda\) is nearly zero, then the regularization term will become nearly zero. As a result, the cost function mostly depends on the MSE term just like before applying regularization. Or we can say that, when \(\lambda\) is nearly zero, the regularization term won’t have any significant effect on shrinking the parameters. Therefore the model is more likely to overfit.</p>
+
+<ul>
+  <li>\(\lambda\) is very large:</li>
+</ul>
+
+<p>Conversely, let’s consider the case where \(\lambda\) becomes extremely large. This time we put much weight in the regularization term. And as a result, the parameters will shrink to a very small values. That approach, however, brings a real problem, that is, rather than preventing Overfitting, our parameters now become so small so that it can’t even fit the training data well, or we can say that: applying so much regularization cause our model to underfit the dataset.</p>
+
+<p>Through the two scenarios above, you can see that choosing the right value for \(\lambda\) is not an easy task. But with the right choice of \(\lambda\), the regularization term can have a significant effect on the learning process, which results in a model which both fits the dataset very well, but not likely to overfit.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>In today’s post, we have talked about <strong>Regularization</strong>, an important technique applied in every Machine Learning model in the real world to deal with the Overfitting problem. I hope after this tutorial, you can have a deeper understanding about what actually causes Overfitting, and the right way to deal with that headache. In the next post, I will continue with one last supervised learning algorithm, the one that I should have showed you in this post instead. But I soon realized that with the lack of knowledge about Regularization, it will be pretty hard to fully understand that algorithm. I hope you not blame me for this. So stay updated and I will be right back!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#classification" class="page__taxonomy-item" rel="tag">classification</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#essential" class="page__taxonomy-item" rel="tag">essential</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#overfitting" class="page__taxonomy-item" rel="tag">overfitting</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#regression" class="page__taxonomy-item" rel="tag">regression</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#regularization" class="page__taxonomy-item" rel="tag">regularization</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-31T00:00:00+05:30">October 31, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Building-Desktop-For-Deep-Learning/" class="pagination--pager" title="Building up my own machine for Deep Learning
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="pagination--pager" title="Installing Caffe on Ubuntu 16.04 (GPU Mode with CUDA)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

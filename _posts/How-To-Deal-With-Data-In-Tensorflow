@@ -1,0 +1,319 @@
+Hello, how are you guys doing? Christmas is near and Santa Claus is coming to town. And I'm here with you, in the second blog post on Tensorflow series. Today, I'm gonna talk about how to deal with input data before we can feed them in neural networks. More specifically, we'll see how to read and process data for image classification or detection problems.
+
+First of all, let's talk a little about data (this talking is skippable :p). In my opinion, dealing with data is a crucial skill to any deep learning engineer. I saw a lot of folks who thought that all about deep learning is creating neural networks. Sorry, that's deadly wrong. Deep learning engineers should not only know how to work with data, but also know how to do it in an efficient way.
+
+> Back in the days, deep learning is supposed to be super slow. Now, longer processing time = the more likely we're gonna die.
+
+That's the end of the talking. Now let's look at the objectives of today's post:
+
+## Objectives
+
+Dealing with data is a broad topic, and we can't discuss everything in one post. Instead, we're gonna focus on two comparing the two most currently-in-use approaches below:
+
+1. The trivial approach: feed_dict style
+2. The most recent and recommended API: tf.data.Dataset
+   
+   2.1. One shot initializer
+
+   2.2. Reinitializable dataset
+
+The main of this post is in the second part about tf.data.Dataset, which we will also get our hands dirty by creating the input pipeline for the Dog Breed dataset. So you can always jump right into that part (add link to id). Otherwise, you can go on for some boring history lesson ;)
+ 
+## The trivial approach: feed_dict
+
+Tensorflow has been expanding so fast. If you're a long-time user of Tensorflow, you may see how it became more and more efficient in every aspect, especially in dealing with data. 
+
+Now, let's take a look at how we used to deal with data in Tensorflow.
+Remember that we used to do something like below?
+```Python
+image = tf.placeholder(tf.float32, [None, 224, 224, 3])
+label = tf.placeholder(tf.int64, [None])
+
+loss, train_op = SomeNetwork(image, label)
+
+with tf.Session() as sess:
+    real_image, real_label = get_data_from_file()
+    loss, _ = sess.run(
+        [loss, train_op],
+        feed_dict={image: real_image,
+                   label: real_label})
+```
+It's the oldest approach to create an input for our network. Here we're not explicitly passing in the actual data, but just placeholders which hold information about the type and shape of the actual data.
+
+We don't pass the real data in until the network starts to use them for computation (through the call of sess.run). You can think of the creation of placeholders is like Loki opens the passway, and when he makes the call, those Chitauri follows that passway into the Earth.
+
+Overall, it's not very efficient. But I find this approach pretty useful at experimental level, where I can sacrifice some speed for less effort on coding (this may change when Tensorflow 2.0 comes out).
+
+## tf.data.Dataset API
+By far, this is the most recent and highly recommended API to deal with data which Tensorflow claims that you can handle everything you used to accomplish by other approaches.
+
+The idea of tf.data.Dataset API, four types of iterator. We'll see two of them
+
+> We learn history by looking at how we did things, we learn the present by doing.
+
+It's not always fun to look at the theory all the time. Let's write some code along the way so that we can intuitively grasp the idea about what is going on.
+
+First, let's go ahead and download the Dog Breed dataset. We'll stick to this dataset for the next posts in this series, so please don't mind if it takes some space on your computer.
+
+Download URL: https://www.kaggle.com/c/dog-breed-identification
+
+Let's extract the zip file and place them so that our folder looks like below:
+
+```
+.
+data_import.ipynb
+data/
+  - all/
+    - test/
+      - test images.jpg
+    - train/
+      - train images.jpg
+    - labels.csv
+```
+
+### One shot iterator
+
+Import necessary packages
+
+```python
+import pandas as pd
+import tensorflow as tf
+import os
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+```
+
+```python
+def read_labels_from_file(data_root, label_path):
+    data = pd.read_csv(label_path)
+    data['fn'] = data.id.map(lambda x: os.path.join(
+        data_root, 'train', x + '.jpg'))
+    int_to_breed = data.breed.unique()
+    breed_to_int = dict((v, k) for k, v in enumerate(int_to_breed))
+    data['int_breed'] = data.breed.map(lambda x: breed_to_int[x])
+    
+    return data.fn, data.int_breed, int_to_breed, breed_to_int
+```
+
+```python
+data_root = './data/all'
+label_path = './data/all/labels.csv'
+
+filenames, labels, int_to_breed, breed_to_int = read_labels_from_file(data_root, label_path)
+
+list(zip(filenames, labels))[:5]
+```
+
+The result will look like this:
+```
+[('./data/all/train/000bec180eb18c7604dcecc8fe0dba07.jpg', 0),
+ ('./data/all/train/001513dfcb2ffafc82cccf4d8bbaba97.jpg', 1),
+ ('./data/all/train/001cdf01b096e06d78e9e5112d419397.jpg', 2),
+ ('./data/all/train/00214f311d5d2247d5dfe4fe24b2303d.jpg', 3),
+ ('./data/all/train/0021f9ceb3235effd7fcde7f7538ed62.jpg', 4)]
+```
+
+Now we have everything we need: one list containing filepaths, one list containing the corresponding labels (in integer).
+
+```python
+def one_shot_input_fn(filenames, labels):
+    dataset = tf.data.Dataset.from_tensor_slices(
+        (filenames, labels))
+```
+
+```python
+    dataset = dataset.map(_parse_data)
+```
+
+```python
+    dataset = dataset.batch(1)
+```
+
+```python
+    iterator = dataset.make_one_shot_iterator()
+```
+
+```python
+    img, label = iterator.get_next()
+    return img, label
+```
+
+```python
+def one_shot_input_fn(filenames, labels):
+    dataset = tf.data.Dataset.from_tensor_slices((filenames, labels))
+    dataset = dataset.map(_parse_data).batch(1)
+    
+    iterator = dataset.make_one_shot_iterator()
+    img, label = iterator.get_next()
+    return img, label
+```
+
+
+```python
+means = [123.68, 116.779, 103.939]
+
+def _parse_data(filename, label, new_size=224):
+    img_string = tf.read_file(filename)
+    img = tf.image.decode_jpeg(img_string)
+    img = tf.image.resize_images(img, (new_size, new_size))
+    img.set_shape([new_size, new_size, 3])
+    img = tf.to_float(img)
+    channels = tf.split(axis=2, num_or_size_splits=3, value=img)
+
+    for i in range(3):
+        channels[i] -= means[i]
+    new_img = tf.concat(axis=2, values=channels)
+
+    label = tf.cast(label, tf.int64)
+    return new_img, label
+```
+
+```python
+def visualize_dataset(imgs, labels):
+    fig, axes = plt.subplots(ncols=4, nrows=4)
+    fig.set_size_inches(10, 10)
+
+    for i, img in enumerate(imgs):
+        img += means
+        np.clip(img, 0, 255, img)
+        img = img[0].astype(np.uint8)
+
+        img = Image.fromarray(img)
+        axes[int(i / 4), i % 4].imshow(img)
+        axes[int(i / 4), i % 4].axis('off')
+        axes[int(i / 4), i % 4].text(0, -10,
+                                     int_to_breed[labels[i]],
+                                     color='red',
+                                     fontsize=11)
+
+    plt.show()
+```
+
+```python
+img, label = one_shot_input_fn(filenames, labels)
+
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    res_imgs = []
+    res_labels = []
+    for _ in range(16):
+        res_img, res_label = sess.run([img, label])
+        res_imgs.append(res_img)
+        res_labels.append(res_label)
+
+visualize_dataset(res_imgs, res_labels)
+```
+
+```python
+def initializable_input_fn(filenames, labels, train_val_ratio=0.8):
+    num_files = len(filenames)
+    num_train_files = int(num_files * train_val_ratio)
+    train_filenames = filenames[:num_train_files]
+    train_labels = labels[:num_train_files]
+    val_filenames = filenames[num_train_files:]
+    val_labels = labels[num_train_files:]
+```
+
+```python
+    train_data = tf.data.Dataset.from_tensor_slices(
+        (train_filenames, train_labels))
+    train_data = train_data.map(_parse_data).shuffle(1000).repeat().batch(4)
+```
+
+```python
+    val_data = tf.data.Dataset.from_tensor_slices(
+        (val_filenames, val_labels))
+    val_data = val_data.map(_parse_data).batch(1)
+```
+
+```python
+    iterator = tf.data.Iterator.from_structure(train_data.output_types,
+                                               train_data.output_shapes)
+```
+
+```python
+    next_element = iterator.get_next()
+```
+
+```python
+    train_init_op = iterator.make_initializer(train_data)
+    val_init_op = iterator.make_initializer(val_data)
+
+    return next_element, train_init_op, val_init_op
+```
+
+```python
+def initializable_input_fn(filenames, labels, train_val_ratio=0.8):
+    num_files = len(filenames)
+    num_train_files = int(num_files * train_val_ratio)
+    train_filenames = filenames[:num_train_files]
+    train_labels = labels[:num_train_files]
+    val_filenames = filenames[num_train_files:]
+    val_labels = labels[num_train_files:]
+
+    train_data = tf.data.Dataset.from_tensor_slices(
+        (train_filenames, train_labels))
+    train_data = train_data.map(_parse_data).shuffle(1000).repeat().batch(4)
+
+    val_data = tf.data.Dataset.from_tensor_slices(
+        (val_filenames, val_labels))
+    val_data = val_data.map(_parse_data).batch(1)
+
+    iterator = tf.data.Iterator.from_structure(train_data.output_types,
+                                               train_data.output_shapes)
+
+    next_element = iterator.get_next()
+
+    train_init_op = iterator.make_initializer(train_data)
+    val_init_op = iterator.make_initializer(val_data)
+
+    return next_element, train_init_op, val_init_op
+```
+
+```python
+next_element, train_init_op, val_init_op = initializable_input_fn(filenames, labels)
+
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    
+    print('Training...')
+    for _ in range(5):
+        sess.run(train_init_op)
+        imgs, labels = sess.run(next_element)
+        print('Image shape:', imgs.shape)
+        print('Label shape:', labels.shape)
+    
+    print('\nValidating...')
+    for _ in range(5):
+        sess.run(val_init_op)
+        imgs, labels = sess.run(next_element)
+        print('Image shape:', imgs.shape)
+        print('Label shape:', labels.shape)
+```
+
+```python
+Training...
+Image shape: (4, 224, 224, 3)
+Label shape: (4,)
+Image shape: (4, 224, 224, 3)
+Label shape: (4,)
+Image shape: (4, 224, 224, 3)
+Label shape: (4,)
+Image shape: (4, 224, 224, 3)
+Label shape: (4,)
+Image shape: (4, 224, 224, 3)
+Label shape: (4,)
+
+Validating...
+Image shape: (1, 224, 224, 3)
+Label shape: (1,)
+Image shape: (1, 224, 224, 3)
+Label shape: (1,)
+Image shape: (1, 224, 224, 3)
+Label shape: (1,)
+Image shape: (1, 224, 224, 3)
+Label shape: (1,)
+Image shape: (1, 224, 224, 3)
+Label shape: (1,)
+```
