@@ -1,0 +1,992 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Installing Caffe on Ubuntu (CPU-ONLY) - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Installing Caffe on Ubuntu (CPU-ONLY)">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/">
+
+
+
+  <meta property="og:description" content="First, to tell you guys the truth, I had no intention to write this post. You know, because I actually don’t have much experience with Caffe. And I am not some kind of experienced tech-guy who can deal with almost developing environment, either.">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/mahaveer0suthar.github.io/images/teaser.jpg">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-09T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Installing Caffe on Ubuntu (CPU-ONLY)">
+    <meta itemprop="description" content="First, to tell you guys the truth, I had no intention to write this post. You know, because I actually don’t have much experience with Caffe. And I am not some kind of experienced tech-guy who can deal with almost developing environment, either.">
+    <meta itemprop="datePublished" content="October 09, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Installing Caffe on Ubuntu (CPU-ONLY)
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  7 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>First, to tell you guys the truth, I had no intention to write this post. You know, because I actually don’t have much experience with Caffe. And I am not some kind of experienced tech-guy who can deal with almost developing environment, either.</p>
+
+<p>Remember I told you about how to prepare your AWS g2.x2large instance for Machine Learning? You can have a look at this post <a href="https://mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" target="_blank">here</a>. I recommended you to use AWS’s instance because of the fact that most of us can’t afford a proper desktop to run Machine Learning stuff. But of course it is always a good idea to set things up similarly on your local machine. Why? Because we can do all the coding on your machine (like configure your network architecture, or test if your codes can be compiled without errors, etc), and just leave the heavy tasks for the GPU instance. It would help you save some money.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>With that thought, I decided to install Caffe on my laptop. And guess what? It took me almost a whole working day to finish! What a shame, I thought. But soon I realize how experienced I became after struggling with it. You know, I should have been spending my Saturday wandering around with my guys without thinking a damn thing about Machine Learning related stuff. But I didn’t regret a little bit, not even a little bit. Because at least I got it done. And I’m here to share my experience with all you guys.</p>
+
+<p>My laptop is running on Ubuntu 16.04, with OpenCV 3.0.0 installed. The other versions of Ubuntu should work as well, because it is the Caffe and the necessary dependencies matter, not the Ubuntu version.</p>
+
+<p>As you may already knew, Caffe is a powerful framework written in C++ for implementing Deep Neural Network and it is being used almost everywhere out there. For that reason, you can just type <em>Caffe installation</em> in Google search bar, and you can find a lot of websites telling you how to do it. But sometimes it may not work to someone, just like my case. So what is the reason then?</p>
+
+<p>First, Caffe does require a lot of necessary dependencies to make it work. And errors occur mostly because of dependencies incompatibility.</p>
+
+<p>As you may be recommended by other sites that you should use <em>Anaconda</em>, one distribution of Python which can self-manage packages installation. I am not saying that <em>Anaconda</em> is bad. In fact I used it a lot in the past, when I had very little experience in Python package installation. It did help me do most of the installing things.</p>
+
+<p>So what is the problem? In my case, having both Python and Anaconda installed caused some kind of a mess, and Caffe struggled with finding the appropriate libraries it needed. Note that Anaconda itself is a completely seperate Python distribution, which means I had two version of Python installed in my machine!</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>So I decided to remove <em>Anaconda</em> from my disk to try some luck. And guess what? The problem was <strong>SOLVED</strong>! So the first thing I want you to try is: if you have both Python and Anaconda installed, try to remove <em>Anaconda</em> first.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo rm</span> <span class="nt">-rf</span> ~/anaconda2</code></pre></figure>
+
+<p>Note that you will have to change the path according to your <em>Anaconda</em> path. Next, we will install Boost:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">--no-install-recommends</span> libboost-all-dev</code></pre></figure>
+
+<p>In the next step, we will install all the necessary packages for Caffe:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get <span class="nb">install </span>libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev <span class="se">\</span>
+libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler</code></pre></figure>
+
+<p>Next, clone Caffe repository, and make a copy of file <em>Makefile.config.example</em>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/BVLC/caffe
+<span class="nb">cd </span>caffe
+<span class="nb">cp </span>Makefile.config.example Makefile.config</code></pre></figure>
+
+<p>Next, we will have to install all the necessary Python packages, using <em>pip</em>. Navigate to <em>python</em> folder, and type the line below:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>pip <span class="nb">install </span>scikit-image protobuf
+<span class="nb">cd </span>python
+<span class="k">for </span>req <span class="k">in</span> <span class="si">$(</span><span class="nb">cat </span>requirements.txt<span class="si">)</span><span class="p">;</span> <span class="k">do </span><span class="nb">sudo </span>pip <span class="nb">install</span> <span class="nv">$req</span><span class="p">;</span> <span class="k">done</span></code></pre></figure>
+
+<p>Note that I got to add <em>sudo</em> to make it work on my laptop. Because what it was supposed to install directly to the real environment.</p>
+
+<p>Next, we have to modify the <em>Makefile.config</em>. Uncomment the line <em>CPU_ONLY := 1</em>, and the line <em>OPENCV_VERSION := 3</em>. I also commented out the lines which indicate using Anaconda just to make sure that Anaconda doesn’t mess up with the installation:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ..
+<span class="nb">sudo </span>vim Makefile.config
+
+<span class="c"># CPU-only switch (uncomment to build without GPU support).</span>
+CPU_ONLY :<span class="o">=</span> 1
+...
+<span class="c"># Uncomment if you're using OpenCV 3</span>
+OPENCV_VERSION :<span class="o">=</span> 3
+...
+<span class="c"># ANACONDA_HOME := $(HOME)/anaconda2</span>
+...
+<span class="c"># PYTHON_LIB := $(ANACONDA_HOME)/lib</span></code></pre></figure>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Now you got everything ready. Let’s make it:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make all</code></pre></figure>
+
+<p>It will take a while to finish. But you would probably get some error message like below:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">CXX src/caffe/net.cpp
+src/caffe/net.cpp:8:18: fatal error: hdf5.h: No such file or directory
+compilation terminated.
+Makefile:575: recipe <span class="k">for </span>target <span class="s1">'.build_release/src/caffe/net.o'</span> failed
+make: <span class="k">***</span> <span class="o">[</span>.build_release/src/caffe/net.o] Error 1</code></pre></figure>
+
+<p>Seems like a mess, huh? It is because <em>hdf5</em> library and <em>hdf5_hl</em> library actually have a postfix <em>serial</em> in their names, the compiler cannot find them. To fix this, we just have to make a <strong>link</strong> to the actual files. Remember, we are not changing their names!</p>
+
+<p>But first, let’s check out the actual name of the libraries. It may vary on your machines, though.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/lib/x86_64-linux-gnu/
+<span class="nb">ls</span> <span class="nt">-al</span>
+
+...
+libhdf5_serial.so.10.1.0
+libhdf5_serial_hl.so.10.0.2
+...</code></pre></figure>
+
+<p>You may find the two files like above. Note again that the version may be different. Just take note the ones you saw. Then we will make a link to them:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo ln</span> <span class="nt">-s</span> /usr/lib/x86_64-linux-gnu/libhdf5_serial.so.10.1.0 /usr/lib/x86_64-linux-gnu/libhdf5.so
+<span class="nb">sudo ln</span> <span class="nt">-s</span> /usr/lib/x86_64-linux-gnu/libhdf5_serial_hl.so.10.0.2 /usr/lib/x86_64-linux-gnu/libhdf5_hl.so</code></pre></figure>
+
+<p>And note that the postfixes of <em>hdf5</em> and <em>hdf5_hl</em> are not always the same. In my case, I assumed that they are the same (<em>10.1.0</em>) and it made me pay the price with another error (of course it took me another while to figure out what I did wrong).</p>
+
+<p>After doing that, try <em>make all</em> again, this time there should be no more errors!</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Next, we will run two other commands:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make <span class="nb">test
+</span>make runtest</code></pre></figure>
+
+<p>And these two should be working as well. And you will likely see the result like below:</p>
+
+<p><img src="/images/projects/installing-caffe-cpu-only/success.png" alt="Success" /></p>
+
+<p>If you saw something similar, then Congratulations! You have successfully installed Caffe! Now you can get your hands dirty with some real Deep Neural Network projects and become a part of Caffe community!</p>
+
+<p>Next step is optional but I highly recommend because we are using Python for our works. We will compile the Python layer so that we can use <em>caffe</em> directly in our Python source code.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make pycaffe</code></pre></figure>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Here, most of your machines will compile without error. But someone may see some error like below (I did too).</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">CXX/LD <span class="nt">-o</span> python/caffe/_caffe.so python/caffe/_caffe.cpp
+python/caffe/_caffe.cpp:10:31: fatal error: numpy/arrayobject.h: No such file or directory
+compilation terminated.
+Makefile:501: recipe <span class="k">for </span>target <span class="s1">'python/caffe/_caffe.so'</span> failed
+make: <span class="k">***</span> <span class="o">[</span>python/caffe/_caffe.so] Error 1</code></pre></figure>
+
+<p>The error indicates that it can not find a header file named <em>arrayobject.h</em>. It was caused because <em>numpy</em> was installed in a different path, and we must manually point to it. Actually, this problem was solved at the time of writing, but the installation path varies, so not everyone will get through it. For ones who encountered the error above, all you have to do is to make a small change to your <em>Makefile.config</em> from this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">PYTHON_INCLUDE :<span class="o">=</span> /usr/include/python2.7 <span class="se">\</span>
+/usr/lib/python2.7/dist-packages/numpy/core/include</code></pre></figure>
+
+<p>to this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">PYTHON_INCLUDE :<span class="o">=</span> /usr/include/python2.7 <span class="se">\</span>
+/usr/local/lib/python2.7/dist-packages/numpy/core/include</code></pre></figure>
+
+<p>After that, let’s do <em>make pycaffe</em> again, and it should work now. Next, we will have to add the module directory to our $PYTHONPATH by adding this line to the end of <em>~/.bashrc</em> file.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>vim ~/.bashrc
+
+<span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$HOME</span>/Downloads/caffe/python:<span class="nv">$PYTHONPATH</span></code></pre></figure>
+
+<p>Note that you have to change your <em>caffe</em> directory accordingly. We are nearly there, next execute the command below to make things take effect:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source</span> ~/.bashrc</code></pre></figure>
+
+<p>At this time, you can import <em>caffe</em> in Python code without any error. Not so hard, right?</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python
+<span class="o">&gt;&gt;&gt;</span> import caffe
+<span class="o">&gt;&gt;&gt;</span></code></pre></figure>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>But we are not done yet. Caffe provides us some examples of the most well-known models. We will use the LeNet model to train the MNIST dataset. Everything was already set up. All we have to do is just make it work:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/Downloads/caffe
+./data/mnist/get_mnist.sh
+./examples/mnist/create_mnist.sh</code></pre></figure>
+
+<p>Note that you have to change the path to where you put <em>caffe</em> accordingly. Next, we will train the model:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">./examples/mnist/train_lenet.sh</code></pre></figure>
+
+<p>At this point, there should be an error telling you that it was trying to use GPU in CPU-only configuration:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">I1009 18:51:42.646926 22536 caffe.cpp:217] Using GPUs 0
+F1009 18:51:42.647065 22536 common.cpp:66] Cannot use GPU <span class="k">in </span>CPU-only Caffe: check mode.
+<span class="k">***</span> Check failure stack trace: <span class="k">***</span>
+    @     0x7fd00383f5cd  google::LogMessage::Fail<span class="o">()</span>
+    @     0x7fd003841433  google::LogMessage::SendToLog<span class="o">()</span>
+    @     0x7fd00383f15b  google::LogMessage::Flush<span class="o">()</span>
+    @     0x7fd003841e1e  google::LogMessageFatal::~LogMessageFatal<span class="o">()</span>
+    @     0x7fd003c38c00  caffe::Caffe::SetDevice<span class="o">()</span>
+    @           0x40ad33  train<span class="o">()</span>
+    @           0x4071c0  main
+    @     0x7fd0027b0830  __libc_start_main
+    @           0x4079e9  _start
+    @              <span class="o">(</span>nil<span class="o">)</span>  <span class="o">(</span>unknown<span class="o">)</span>
+Aborted <span class="o">(</span>core dumped<span class="o">)</span></code></pre></figure>
+
+<p>Well, that’s OK. We just have to apply a tiny fix to the file <em>examples/mnist/lenet_solver.prototxt</em>, replace <em>GPU</em> with <strong>CPU</strong>, and save it. Try to run the command above again, then everything should work just fine!</p>
+
+<p>It will take a while to finish the training (maybe long since we are using CPU). When it completes, you may see something like this:</p>
+
+<p><img src="/images/projects/installing-caffe-cpu-only/training.png" alt="Training" /></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Your result may vary but we will likely achieve an accurary value of approximately 99%. Congratulations again! Caffe is now working perfectly on your machine!</p>
+
+<p>After today’s post, I hope that you all had Caffe installed successfully on you machines. But if you still had troubles installing Caffe, like some frustrating errors keep coming or something, then feel free to leave me a comment below, and I will try to help you figure out why. See you!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#caffe" class="page__taxonomy-item" rel="tag">caffe</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#deep-learning" class="page__taxonomy-item" rel="tag">deep-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#environment" class="page__taxonomy-item" rel="tag">environment</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#essential" class="page__taxonomy-item" rel="tag">essential</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#installation" class="page__taxonomy-item" rel="tag">installation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#project" class="page__taxonomy-item" rel="tag">Project</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-09T00:00:00+05:30">October 09, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="pagination--pager" title="Machine Learning Part 4: Setting Up Python Environment for Computer Vision and Machine Learning
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" class="pagination--pager" title="Machine Learning Part 5: Underfitting and Overfitting Problems
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

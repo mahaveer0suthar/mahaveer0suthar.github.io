@@ -1,0 +1,1109 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 5: Underfitting and Overfitting Problems - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 5: Underfitting and Overfitting Problems">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/">
+
+
+
+  <meta property="og:description" content="Here we are again, in the fifth post of Machine Learning tutorial series. Today I will talk about two common problems you may face in Machine Learning: Underfitting and Overfitting. Wait! There is something wrong, isn’t it? - You may wonder…">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/mahaveer0suthar.github.io/images/tutorials/underfit-overfit/poly_2_test.jpg">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-12T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 5: Underfitting and Overfitting Problems">
+    <meta itemprop="description" content="Here we are again, in the fifth post of Machine Learning tutorial series. Today I will talk about two common problems you may face in Machine Learning: Underfitting and Overfitting. Wait! There is something wrong, isn’t it? - You may wonder…">
+    <meta itemprop="datePublished" content="October 12, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 5: Underfitting and Overfitting Problems
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  11 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Here we are again, in the fifth post of Machine Learning tutorial series. Today I will talk about two common problems you may face in Machine Learning: Underfitting and Overfitting. Wait! There is something wrong, isn’t it? - You may wonder…</p>
+
+<p>Of course I remember promising you in the previous post, that today I will dig deeper into Linear Regression, and together we will do some coding. Actually, I intended to name today’s post “Implementing Linear Regression” or something, but I soon realized that it would be inappropriate. Good news is today’s post will mainly focus on implementation of Linear Regression, and what we can do to improve the quality of the Model. By doing that, I am actually leading you to go into some concept which is more general, and can be applied not only in Linear Regression, but every spot which Machine Learning takes place.</p>
+
+<p>That is enough of talking. First, let’s get our hands dirty. If you went through my previous post, you would now have everything set up. But if you didn’t, you might want to take a look at it here: <a href="https://mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" target="_blank">Setting Up Python Environment</a>.</p>
+
+<h3 id="implementing-linear-regression">Implementing Linear Regression</h3>
+
+<p>Open Terminal and go into Python console mode:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> 
+python</code></pre></figure>
+
+<p>Now let’s import <em>sklearn</em> module for Linear Regression. <em>sklearn</em> is a shortname of <strong>scikit-learn</strong>, a great Python library for Machine Learning.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span></code></pre></figure>
+
+<p>We are not using only <em>LinearRegression</em>. We will work with arrays, so here I also imported <em>numpy</em> for dealing with arrays. We will also draw some graphs to visualize the data, so that’s why I imported <em>pyplot</em>, a great module for graph drawing.</p>
+
+<p>Remember the data I used in the previous post on Linear Regression? I will show it right below for you:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now let’s use that to prepare our training data:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre></figure>
+
+<p>Nearly every Machine Learning library requires data to be formatted in the way which each row is one training example (or testing example), and each column represents one feature’s data. So we have to reshape our data accordingly.</p>
+
+<p>Now let’s plot our training data. You will receive the same figure with the one in the previous post:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/linear-regression/1.jpg" alt="Training_data" /></p>
+
+<p>Next, let’s initialize the Linear Regression model:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span></code></pre></figure>
+
+<p>Then we will train our Model, using the training data above. You can do that by simply calling the <strong>fit</strong> function, which takes feature matrix \(X\) and label vector \(y\) as parameters:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></code></pre></figure>
+
+<p>Our training data is quite simple, so the learning process finished so fast as if it never happened. All the change during training (like weights and bias), was stored in the model object. Let’s see what we got:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mf">1.77575758</span><span class="p">]])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">4.93333333</span><span class="p">])</span></code></pre></figure>
+
+<p>Obviously, you can get more information through other attributes of model object, but now we will only focus on <em>coef_</em>, which stores the weight parameter, and <em>intercept_</em>, which stores the bias parameter.</p>
+
+<p>Next, let’s compute the prediction vector <em>a</em>, using the obtained weight and bias:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">a</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span></code></pre></figure>
+
+<p>Now let’s draw all \(X\), \(y\) and \(a\) on the same plot. Here we got a straight line, which fit the data better than what we did before (which is easy to understand, since we only went through 4 iterations).</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_1.jpg" alt="poly_1" /></p>
+
+<p>So simple, right? Just a few lines of code, we have just prepared our training data, trained our Model, and visualized the result we got! Yeah, <strong>scikit-learn</strong> helps us do all the heavy things. In later posts, you will see that it can even handle more complicated jobs.</p>
+
+<h3 id="improving-the-performance-of-linear-regression">Improving the performance of Linear Regression</h3>
+
+<p>Obviously, we can see that the straight line above fits pretty well, but not good enough. And we need a more suitable approach. But first, let’s evaluate how well the Model is performing numerically, by computing the accuracy over the training data:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="mf">0.84988070842366825</span></code></pre></figure>
+
+<p>We cannot always evaluate something just by seeing it, right? We need something which is more concrete, yeah, a number. By looking at numbers, we will have a better look, and easily compare different things. <strong>scikit-learn</strong> provides us the <em>score</em> function, whose parameters are similar to the <em>fit</em> function.</p>
+
+<p>And you can see that, our Model now has the accuracy of 85% over the training data. Commonly,  we demand a higher accuracy, let’s say 90% or 95%. So by looking at the current accuracy, we can tell that our Model is not performing as we are expecting. So let’s think about an improvement. But how can we do that?</p>
+
+<p>Remember I told you about Features in the first <a href="https://mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" target="_blank">Post</a>? Features are something we use to distinguish one object from others. So obviously, if we have more Features, then we will likely have a better fit model, since it can receive more necessary information for training. But how we can acquire more Features?</p>
+
+<h4 id="polynomial-features">Polynomial Features</h4>
+<p>The easiest way to add more Features, is to computing <em>polynomial features</em> from the provided features. It means that if we have \(X\), then we can use \(X^2\), \(X^3\), etc as additional features. So let’s use this approach and see if we can improve the current Model. First, we have to modify our \(X\) matrix by adding \(X^2\):</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np_c</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">X</span>
+<span class="n">array</span><span class="p">([[</span>   <span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>    <span class="mi">4</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">9</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">4</span><span class="p">,</span>   <span class="mi">16</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">5</span><span class="p">,</span>   <span class="mi">25</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">6</span><span class="p">,</span>   <span class="mi">36</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">7</span><span class="p">,</span>   <span class="mi">49</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">8</span><span class="p">,</span>   <span class="mi">64</span><span class="p">],</span>
+       <span class="p">[</span>   <span class="mi">9</span><span class="p">,</span>   <span class="mi">81</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mi">10</span><span class="p">,</span>  <span class="mi">100</span><span class="p">]])</span></code></pre></figure>
+
+<p>Similar to previous step, let’s train our new Model, then compute the prediction vector \(a\):</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span></code></pre></figure>
+
+<p>Mathematically, we will now have \(a=\theta_0 + \theta_1X + \theta_2X^2\). Note that now we have more complicated matrix <em>X</em>, so we will have to use the <em>dot</em> function. An error will occur if we just use the multiply operator like above. I also created a new \(x\) variable, which ranges from 1 to 10, but with 0.1 step. Use the new \(x\) to compute \(a\) will result in a smoother graph of \(a\), since \(a\) is no longer a straight line anymore.</p>
+
+<p>Now let’s plot things out and see what we got with new feature matrix:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_2.jpg" alt="poly_2" /></p>
+
+<p>As you can see, now we obtain a curved line, which seems to fit our training data much better. To be more concrete, let’s use the <em>score</em> function:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="mf">0.87215506914951546</span></code></pre></figure>
+
+<p>You see that? Now we got a new accuracy of 87%, which is a huge improvement right? At this point, you may think that we can improve it a lot more by continuing to add more polynomial features to it. Well, don’t guess. Let’s just do it. This time we will add up to degree 9.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_9.jpg" alt="poly_9" /></p>
+
+<p>Now we just obtained a new curve which fit our training data perfectly. Let’s use the <em>score</em> function again to get an exact number:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="mf">0.99992550472904074</span></code></pre></figure>
+
+<p>Wow, let’s see what we have here, an accuracy of 100%. This is real magic, you may think.</p>
+
+<p>But that is just where the tragic begins…</p>
+
+<h3 id="overfitting--underfitting">OVERFITTING &amp; UNDERFITTING</h3>
+
+<p>Now let imagine our data has total 15 examples, and I just showed you the first 10. I will reveal the last 5 examples like below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>11</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>22</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So actually our data will look like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">22</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/full_data.jpg" alt="full_data" /></p>
+
+<p>Let’s see what happens if we use the Model obtained from degree 9 polynomial features:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_9_overfit.jpg" alt="poly_9_overfit" /></p>
+
+<p>Do you see what I am seeing? What a tragic! It doesn’t seem to fit the new data at all! We don’t even feel the need of computing the accuracy on the new data! So what the hell this is all about?</p>
+
+<p>As I told you before, in the first post, that we only provided a fixed set of training data, and the Model will have to deal with new data which it has never seen before. New data, which may vary in unpredictable way in real life, penalized our trained Model this time! In Machine Learning term, we call it <strong>OVERFITTING</strong> problem (or High Variance). Overfitting, as the name is self-explained itself, means that the Model fits the data very well when we prodived a set of data containing a lot of features. We can see that the Model tends to memorize the data, rather than to learn from it, which makes it unable to predict the new data.</p>
+
+<p>In contrast, what will happen if we use just one feature like we did in the beginning (or we can say that we provided a set of data which is poorly informative)? You have already seen that it resulted in a very low accuracy, which is not what we expected, either. We call this problem <strong>UNDERFITTING</strong> (or High Bias).</p>
+
+<p>Overfitting &amp; Underfitting, in both cases, are something that we try to avoid. And you will mostly face these problems all the time you work with Machine Learning. Of course, there are many ways to deal with them, but I will leave all the details for a future post. This time I will tell you the simplest way, which can be seen as a “must-do” in the very first step of any Machine Learning problem.</p>
+
+<h3 id="splitting-dataset-for-training-and-testing">Splitting dataset for training and testing</h3>
+
+<p>The first thing to do to prevent the problems above, is always splitting the dataset into training data and testing data. Never just count on the accuracy on training data! Why? Because even though we obtained a high accuracy, it does not mean that our Model is doing a good job. Conversely, we need to watch out for <em>Overfitting</em> problem. By splitting our dataset into two seperate parts, we will use one part for training, and the other for evaluating the trained Model. Because we evaluate the performance on a separate data, we can know if our Model can work well with new data that it has never seen. And we can somehow tell whether our Model has <em>Overfitting</em> problem or not.</p>
+
+<p><em>Underfitting</em>, on the other hand, can easily be discovered just by looking at the accuracy over the training data, because if our Model has <em>Underfitting</em> problem, then it will perform poorly on both dataset.</p>
+
+<p>Finally, we will pick the Model which has the highest accuracy on the testing data.</p>
+
+<p>With the approach I have shown you, let’s decide which Model to choose among three models above. We will use first ten examples as training data, and the last five examples for testing.</p>
+
+<h4 id="model-1">Model 1</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">:])</span>
+<span class="o">-</span><span class="mf">12.653810835629017</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_1_test.jpg" alt="poly_1_test" /></p>
+
+<h4 id="model-2">Model 2</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">:])</span>
+<span class="o">-</span><span class="mf">0.51814820280729812</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_2_test.jpg" alt="poly_2_test" /></p>
+
+<h4 id="model-3">Model 3</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">:])</span>
+<span class="o">-</span><span class="mf">384608869887696.81</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">,</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/underfit-overfit/poly_9_overfit.jpg" alt="poly_9_overfit" /></p>
+
+<p>As you can see, both by visualizing and by looking at the accuracy. Our first model is too simple, which didn’t fit our data well. This is an example of <em>Underfitting</em> problem. In contrast, our third model is way too complicated, which performed very well on training data, but failed to fit the testing data. This is what we called <em>Overfitting</em> problem.</p>
+
+<p>The second model may not fit as well as the third model, but it is the one that actually learned, which results in good performance over the testing data. And we can somehow say that, it will also predict well with any other data which it has never seen during training.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>So today, through implementing Linear Regression, I led you through the most common problems you may face when working with Machine Learning, which are <em>Underfitting</em> and <em>Overfitting</em>. I also showed you the easiest way to avoid those problems, which is always splitting the dataset into two parts: one for training purpose, and one for testing.</p>
+
+<p>Hope you find today’s post helpful and you now put a further step into Machine Learning world, I think. There is no stopping as you has gone this far. In the next post, I will continue with <strong>Logistic Regression</strong>, which is an extremely important algorithm that you must understand, because it is the key which leads you to the most powerful learning technique nowadays: Neural Network. So stay updated, and I will be with you soon. See you!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#implementation" class="page__taxonomy-item" rel="tag">implementation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#linear-regression" class="page__taxonomy-item" rel="tag">linear-regression</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#overfit" class="page__taxonomy-item" rel="tag">overfit</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#problems" class="page__taxonomy-item" rel="tag">problems</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#underfit" class="page__taxonomy-item" rel="tag">underfit</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-12T00:00:00+05:30">October 12, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-CPU-Only/" class="pagination--pager" title="Installing Caffe on Ubuntu (CPU-ONLY)
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="pagination--pager" title="Compiling and Running Faster R-CNN on Ubuntu (CPU Mode)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

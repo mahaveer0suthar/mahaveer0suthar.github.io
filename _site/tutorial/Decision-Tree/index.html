@@ -1,0 +1,1231 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 8: Decision Tree - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 8: Decision Tree">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/">
+
+
+
+  <meta property="og:description" content="Hello guys, I’m here with you again! So we have made it to the 8th post of the Machine Learning tutorial series. The topic of today’s post is about Decision Tree, an algorithm that is widely used in classification problems (and sometimes in regression problems, too). Decision Tree is well-known not only for its great performance on classification, but also for its easy-to-understand algorithm.">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/mahaveer0suthar.github.io/images/tutorials/decision-tree/graph.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-26T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 8: Decision Tree">
+    <meta itemprop="description" content="Hello guys, I’m here with you again! So we have made it to the 8th post of the Machine Learning tutorial series. The topic of today’s post is about Decision Tree, an algorithm that is widely used in classification problems (and sometimes in regression problems, too). Decision Tree is well-known not only for its great performance on classification, but also for its easy-to-understand algorithm.">
+    <meta itemprop="datePublished" content="October 26, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 8: Decision Tree
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  14 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Hello guys, I’m here with you again! So we have made it to the 8th post of the Machine Learning tutorial series. The topic of today’s post is about <strong>Decision Tree</strong>, an algorithm that is widely used in classification problems (and sometimes in regression problems, too). <em>Decision Tree</em> is well-known not only for its great performance on classification, but also for its easy-to-understand algorithm.</p>
+
+<p>As we have already seen up to now, in <a href="https://mahaveer0suthar.github.io/tutorial/Linear-Regression/" target="_blank">Linear Regression</a> and <a href="https://mahaveer0suthar.github.io/tutorial/Logistic-Regression/" target="_blank">Logistic Regression</a> tutorials, understanding how a learning algorithm works is somehow irritated. We got to go through boring theories, boring mathematical explanations and so on. Although I tried my best to make the explanation as simple as I can, but you know, functions is still functions, matrices are still matrices, there is no other way to get rid of those terms. But you won’t have to go through that pain today. <em>Decision Tree</em> can totally be explained using human-understandable natural language. So keep reading, okay?</p>
+
+<p>And before we get started, it’s great to know that we have made it to the 8th post of the Machine Learning tutorial series. If you take a look back, I’m quite sure you will be surprised by how much you have progressed. We have learned two learning algorithms: <em>Linear Regression</em> and <em>Logistic Regression</em> respectively. We have worked on some simple dataset and visualized how your Model performed. At the moment, I’m quite sure that you are now familiar with Machine Learning. So in this post, we will use a more complicated set of data and see how our learning algorithms handle it.</p>
+
+<p>So, let’s talk about <em>Decision Tree</em>. You are somehow a real Model of Decision Tree algorithm yourself! In your daily life, you make many decisions exactly the same way <em>Decision Tree</em> does, subconsciously (of course). For example, your friend Joe invited you to his party. You may asked him back: “Any girls tonight?”. He said yes. You asked him again: “Will Miley join too?”. “Of course, homie!”, he replied. And you accepted his invitation. The example I have just showed you is one of many situations that you may face everyday, in which you have to make your own decision on something. For that example, I can express it using the graph below:</p>
+
+<p><img src="/images/tutorials/decision-tree/graph.png" alt="graph" /></p>
+
+<p>Simply enough, right? You may be wondering: Is this real that such simple algorithm can solve complicated classification problem? The answer is: Yes! To make it more clear to you, let’s consider a bigger one:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weather</th>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>clear</td>
+      <td>&lt;10</td>
+      <td>&lt;70</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>shower</td>
+      <td>20~30</td>
+      <td>&gt;80</td>
+      <td>fit</td>
+      <td>stressed</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td>storm</td>
+      <td>10~20</td>
+      <td>&gt;80</td>
+      <td>fit</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>shower</td>
+      <td>10~20</td>
+      <td>&gt;80</td>
+      <td>slightly</td>
+      <td>stressed</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>&gt;30</td>
+      <td>70~80</td>
+      <td>fit</td>
+      <td>lazy</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td>storm</td>
+      <td>20~30</td>
+      <td>&gt;80</td>
+      <td>fit</td>
+      <td>stressed</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>&gt;30</td>
+      <td>70~80</td>
+      <td>severe</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>10~20</td>
+      <td>&lt;70</td>
+      <td>severe</td>
+      <td>stressed</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>shower</td>
+      <td>10~20</td>
+      <td>70~80</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>shower</td>
+      <td>&gt;30</td>
+      <td>&gt;80</td>
+      <td>fit</td>
+      <td>happy</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td>storm</td>
+      <td>20~30</td>
+      <td>70~80</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>10~20</td>
+      <td>&lt;70</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>?</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s see what we have here. Here’s the dataset I created for demonstration. I actually created based on my running experience, but some examples may sound weird to you, please ignore them for now, lol.</p>
+
+<p>Let’s say we want to predict whether I am gonna go for a run, based on some factors such as Weather, Temperature or even my Mood! And as you has learned so far, Weathers, Temperature, Humidity, Injure, Mood are just the features, and the YES or NO in the RUN column is the targets (or labels).</p>
+
+<p>Before going further into an appropriate explanation on how the algorithm works, I will first show you how we can solve the problem using the approach above.</p>
+
+<p>First, let’s randomly pick one feature from the features above. We will use that feature as the first condition, exactly the same way you asked “Any girls tonight?” above. To make it easy, let’s pick the first one, Weather. As you can see, Weather can be either <em>clear</em> or <em>shower</em> or even <em>storm</em>. We will then split our data into three groups according to the Weather feature. In terms of Decision Tree, each time we use a feature to split the data, we create one <strong>node</strong>, and each group is called one <strong>subset</strong>. Let’s first see how the <em>clear</em> Weather subset looks like:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weather</th>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>clear</em></td>
+      <td>&lt;10</td>
+      <td>&lt;70</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td><em>clear</em></td>
+      <td>&gt;30</td>
+      <td>70~80</td>
+      <td>fit</td>
+      <td>lazy</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td><em>clear</em></td>
+      <td>&gt;30</td>
+      <td>70~80</td>
+      <td>severe</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td><em>clear</em></td>
+      <td>10~20</td>
+      <td>&lt;70</td>
+      <td>severe</td>
+      <td>stressed</td>
+      <td>NO</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s take a look at the RUN column. Obviously, just knowing the Weather is clear is not enough to decide whether to make a run or not. Just like the example above, you didn’t make your decision after just one question, right? So we will have to look for another feature, hoping it will help us decide. Let’s pick the <em>Temperature</em> feature. Now we can omit the Weather column (because it contains only <em>clear</em>), and just like what we did, we see that the Temperature feature can be either <em>&lt;10</em> or <em>10~20</em> or <em>&gt; 30</em>, so we will now have three more subsets, let’s say, subsets of the subset above (where Weather is <em>clear</em>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>&lt;10</em></td>
+      <td>&lt;70</td>
+      <td>slightly</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>10~20</em></td>
+      <td>&lt;70</td>
+      <td>severe</td>
+      <td>stressed</td>
+      <td>NO</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>&gt;30</em></td>
+      <td>70~80</td>
+      <td>fit</td>
+      <td>lazy</td>
+      <td>YES</td>
+    </tr>
+    <tr>
+      <td><em>&gt;30</em></td>
+      <td>70~80</td>
+      <td>severe</td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s take a look at three new subsets above. The first two subsets are already clear, because the RUN column in each subset contains only one value. In terms of Decision Tree, we call the result in those subsets <strong>Leaf Nodes</strong>, and when they are now <strong>pure</strong>, which means that the output contains only one value. Meanwhile, the third subset still requires some further work. But it’s quite easy now. Let’s go ahead and use the <em>Injure</em> feature to create two new subsets:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>70~80</td>
+      <td><em>fit</em></td>
+      <td>lazy</td>
+      <td>YES</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Humidity</th>
+      <th>Injure</th>
+      <th>Mood</th>
+      <th>RUN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>70~80</td>
+      <td><em>severe</em></td>
+      <td>happy</td>
+      <td>NO</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Up to now, all the nodes in the <em>clear</em> Weather subset are clear, since there’s no any node in which the RUN column contains more than one value. We can now move on to the rest two subsets: the <em>shower</em> Weather subset and the <em>storm</em> Weather subset. By doing exactly the same way, we will get a result in the end, where all the subsets are clear. I have created a another graph for a better visualization:</p>
+
+<p><img src="/images/tutorials/decision-tree/run_graph.png" alt="run_graph" /></p>
+
+<p>Using the graph above, we can now predict the value of the RUN column for our last row above:</p>
+
+<p><img src="/images/tutorials/decision-tree/run_graph_pred.png" alt="run_graph_pred" /></p>
+
+<p>So, it’s likely that I’m gonna stay at home with my PlayStation 4 that night, lol.</p>
+
+<p>So that’s it. Just easy to understand like I said earlier, right? Of course, we have some kind of mathematical explanation for how Decision Tree actually does. For example, choosing which Feature to split in the beginning is not done randomly, but depends on some considerations. And each time we need to create new subsets from the parent subset, the process is repeated again. Why do we have to make things such complicated, you may ask. Technically say, Decision Tree is a greedy algorithm, which means that it’s likely to fall into local-minimum rather than the desired global-minimum, which means we may get an ugly result if we run out of luck. I will give you a simple explanation for Decision Tree algorithm below for ones who concern. You can skip it to jump directly to the Python Implementation because the explanation is just optional.</p>
+
+<h3 id="decision-tree-id3-algorithm">Decision Tree: ID3 Algorithm</h3>
+
+<p>So you decided to give Decision Tree’s algorithm a look. I really appreciate that. Knowing what is behind the scenes in somehow unrejectable, right? I won’t waste any other minute of your time. Let’s go straight into the algorithm. Actually, since Decision Tree was introduced quite long ago, the original algorithm has been revised and improved so many times, which the successor became more complex and robust than its predecessor. Among those, ID3 may probably be the best well-known algorithm. I think once you understand ID3, you can understand all its successors without problems.</p>
+
+<p>So, how does ID3 algorithm work? To make it as simple as possible, I list out all the steps below:</p>
+
+<h3 id="1-call-the-current-dataset-s-we-will-then-compute-the-entropy-hs-on-s-as-follow">1/ Call the current dataset \(S\). We will then compute the <strong>Entropy</strong> \(H(S)\) on S as follow:</h3>
+
+<script type="math/tex; mode=display">H(S)=-\sum_{j=1}^Kp(y_j)\log_2p(y_j)</script>
+
+<p>, where \(K\) is the number of classes, \(p(y_j)\) is the proportion of number of elements of \(y_j\) class to the number of entire elements in output of \(S\):</p>
+
+<p>\(H(S)\) tell us how uncertain our dataset is. It ranges from \(0\) to \(1\), which \(0\) is the case when the output contains only one class (pure), whereas \(1\) is the most uncertain case.</p>
+
+<p>And in case you may ask, yes, that’s exactly the same as the entropy cost function that I showed you in Logistic Regression tutorial (except the \(\frac{1}{m}\) term). As you already knew, the smaller the entropy function, the better classification result we can achive.</p>
+
+<h3 id="2-next-we-will-compute-the-information-gain-igas">2/ Next, we will compute the <em>Information Gain</em> \(IG(A,S)\).</h3>
+
+<p>Information Gain is computed seperately on each feature of the current dataset \(S\), whose value indicates how much the uncertainty in S was reduced <strong>after</strong> splitting \(S\) using feature \(A\). We can see that it looks like some kind of derivative, where we take the difference of the Entropy before and after splitting:</p>
+
+<script type="math/tex; mode=display">IG(A, S)=H(S)-\sum_{i=1}^np(t)H(t)</script>
+
+<p>, where \(A\) is the feature used for splitting, \(n\) is the possible number of values of \(A\), \(p(t)\) is the proportion of number of elements whose values is \(t\) to the number of all elements of feature \(A\).</p>
+
+<h3 id="3-after-compute-all-the-information-gains-of-all-features-we-will-then-split-the-current-dataset-s-using-the-feature-which-has-the-highest-information-gain">3/ After compute all the Information Gains of all features, we will then split the current dataset \(S\) using the feature which has the highest Information Gain.</h3>
+
+<h3 id="4-repeat-from-step-1-with-the-new-current-dataset-until-all-nodes-are-clear">4/ Repeat from step 1 with the new current dataset until all nodes are clear.</h3>
+
+<p>That’s it. But just skimming through the algorithm may not make any sense about how the algorithm works, right? So, let’s use the dataset above as an example.</p>
+
+<p>First, our current \(S\) would be the entire original table, right? We will compute its Entropy \(H(S)\). Look at the RUN column (which is our output), it has \(4\) YES and \(7\) NO over \(11\) examples, so its Entropy will be as follow:</p>
+
+<script type="math/tex; mode=display">H(S)= -p(YES)\log_2p(YES)-p(NO)\log_2p(NO)=-\frac{4}{11}\log_2(\frac{4}{11})-\frac{7}{11}\log_2(\frac{7}{11})=0.9457</script>
+
+<p>Next, we will compute Information Gain on each feature. Let’s first look at the Weather feature. It has three possible values: <em>clear</em>, <em>shower</em> and <em>storm</em>. <em>clear</em> Weather has \(4\) examples, so we have: \(p(clear)=\frac{4}{11}\). In those \(4\) examples, we have \(1\) YES and \(3\) NO, so the Entropy of <em>clear</em> Weather will be:</p>
+
+<script type="math/tex; mode=display">H(clear)= -p(YES)\log_2p(YES)-p(NO)\log_2p(NO)=-\frac{1}{4}\log_2(\frac{1}{4})-\frac{3}{4}\log_2(\frac{3}{4})=0.8113</script>
+
+<p>We now can do similarly to the rest two values to obtain values like below:</p>
+
+<script type="math/tex; mode=display">p(shower)=\frac{4}{11}\\
+
+H(shower)=-p(YES)\log_2p(YES)-p(NO)\log_2p(NO)=-\frac{3}{4}\log_2(\frac{3}{4})-\frac{1}{4}\log_2(\frac{1}{4})=0.8113\\
+
+p(storm)=\frac{3}{11}\\
+
+H(storm)=0</script>
+
+<p>Note that in the case of <em>storm</em> Weather, its output contains only <em>NO</em> value, so its Entropy will be \(0\), you don’t need to compute it by hand (and even if you do, you’ll soon realize that it is impossible because of the term \(\log_2(0)\)!).</p>
+
+<p>And I would like to talk a little bit about the case when \(H(t)=1\), which I mentioned it as the most uncertain case. We can only obtain that value when the proportion of each class is equal to others’. In the case of our current dataset, if the number of YES is equal to the number of NO on the considered subset, then it’s easy to see that there is a big chance that it can’t be fully classified (that’s why we call it the most uncertain case).</p>
+
+<p>So now we can compute the Information Gain on the Weather feature as follow:</p>
+
+<script type="math/tex; mode=display">IG(Weather, S)=0.9457-\frac{4}{11}*0.8113-\frac{4}{11}*0.8113-\frac{3}{11}*0=0.3557</script>
+
+<p>Continue repeat this process with other features, you will likely end up with results like this:</p>
+
+<script type="math/tex; mode=display">IG(Weather, S)=0.3557\\
+
+IG(Temperature, S)=0.1498\\
+
+IG(Humidity, S)=0.2093\\
+
+IG(Injure, S)=0.2093\\
+
+IG(Mood, S)=0.2275</script>
+
+<p>From the results above, IG on Weather has the highest value, so use Weather as a splitting condition will have the highest chance to reduce the uncertainty of dataset \(S\), and may lead to a good classification in the end.</p>
+
+<p>So that’s all I have to tell you about Decision Tree’s ID3 algorithm. Hopely this explanation somehow can help you have a deeper understanding about what was actually done behind the scenes. You may want to read more about its successors such as C4.5 or C5.0 algorithms. And you will find them not so hard to understand at all!</p>
+
+<p>Now, let’s jump to the implementation! Can’t wait no more, can you?</p>
+
+<h3 id="decision-tree-with-scikit-learn">Decision Tree with scikit-learn</h3>
+
+<p>As I mentioned in the previous tutorials, the <strong>scikit-learn</strong> library comes bundled with everything you need to implement Machine Learning algorithms with ease. Furthermore, the library provides us many methods to generate data for learning purpose. And today I will use one of them to create a more complicated dataset, just to see how well Decision Tree can handle that.</p>
+
+<p>First, let’s import necessary modules as usual:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">cross_val_score</span></code></pre></figure>
+
+<p>If you went through my last tutorial, you may now know a proper way to evaluate the performance of a Machine Learning Model using the <em>cross_val_score</em> method. And if you didn’t, you can always give it a look here: <a href="https://mahaveer0suthar.github.io/tutorial/Cross-Validation/" target="_blank">Cross Validation</a>.</p>
+
+<p>Next, let’s using <em>make_classification</em>, a method provided by scikit-learn library to generate data for classification problems.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+	<span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code></pre></figure>
+
+<p>Let’s plot the data we created to see what it looks like:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">X1_min</span><span class="p">,</span> <span class="n">X1_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span>
+<span class="n">X2_min</span><span class="p">,</span> <span class="n">X2_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'rainbow'</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'X1'</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'X2'</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">X1_min</span><span class="p">,</span> <span class="n">X1_max</span><span class="p">])</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">X2_min</span><span class="p">,</span> <span class="n">X2_max</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p>In my case, the data looks like below. Note that your graph may be way different, since the <em>make_classification</em> method generates data in some unpredictable way.</p>
+
+<p><img src="/images/tutorials/decision-tree/data.png" alt="data" /></p>
+
+<p>As you might notice, I also included Logistic Regression. That is because I want to compare the performance of the two classification algorithms that we have known so far. From now on, you will learn some more algorithms, and it’s always a good practice to compare between them, to see what algorithm work best for a particular problem.</p>
+
+<p>Let’s train our Model using one algorithm at a time, and print out the mean accuracy of each algorithm respectively. We will, of course, use the <em>cross_val_score</em> method for evaluation:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Decision Tree: {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Logistic Regression: {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span></code></pre></figure>
+
+<p>So let’s run our code a few times and see how the two algorithms perform. Note that you have to run the <em>make_classification</em> too, or you will likely get the same results!</p>
+
+<p>Here’s my results:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.97999</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.99</span>
+
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.98999</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.99487</span>
+
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.91</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.935</span></code></pre></figure>
+
+<p>As you see in the result above, Decision Tree’s performance is not any better (or even worse) than Logistic Regression’s. Let’s go ahead and try customizing the parameters of <em>make_classification</em> method (like increasing number of features, number of classes or number of samples, etc), you will likely realize that the two algorithms don’t have any significant difference. That is because the data generated by <em>make_classification</em> is linear, which means that Logistic Regression shouldn’t find any difficulty in fitting the data. Also note that we initialized both with default hyper-parameters (don’t mess with our \(\theta\) parameters, I will have a post on tuning hyper-parameter soon!), which means that our algorithms can perform even better!</p>
+
+<p>So, let’s try another dataset. This time I will create a non-linear dataset, and see if these two algorithms can handle as well as they did above. Just like <em>make_classification</em> method for generating data for classification problems, scikit-learn library provides us some more methods to generate some particular dataset. One of those is <em>make_circles</em> method, which helps generate data with circular distribution. So let’s use it to create a new dataset, and see how it looks like:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_circles</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_circles</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span></code></pre></figure>
+
+<p>The code for drawing the graph is exactly same as above so I omit it for now. I highly recommend you to put everything in a python file, so you just need to modify a few lines, without having to re-run the code for drawing the graph!</p>
+
+<p>In my case, I have a graph like below:</p>
+
+<p><img src="/images/tutorials/decision-tree/circle_graph.png" alt="circle_graph" /></p>
+
+<p>As you could see, our data is now no longer linearly distributed. I can’t wait to see how the two algorithms handle it. After I run the code three times, I got the result below:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.84</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.455</span>
+
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.86</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.465</span>
+
+<span class="n">Decision</span> <span class="n">Tree</span><span class="p">:</span> <span class="mf">0.83</span>
+<span class="n">Logistic</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">0.45</span></code></pre></figure>
+
+<p>Now what? The accuracy of Logistic Regression seems horrible, right? That was somehow predictable, because we have already talked in the previous tutorial that a straight line may not work well with non-linear dataset. But look at the results of Decision Tree, they are satisfying, I think, since we haven’t tuned any hyper-parameters of the algorithm. So now you have your first tool to deal with non-linear dataset! Decision Tree is simply incredible. The algorithm is easy to understand, which you can explain to your friends just like telling them a story, and yet the performance is impressive.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>So today, we have just talked about Decision Tree and used it to solve a few classification problems. We have seen an outstanding performance on different kinds of data. It doesn’t matter whether our dataset is linear or non-linear, the algorithm can do the jobs just fine. That is definitely a great tool that you have just added to your Machine Learning toolbox!</p>
+
+<p>In the next post, I will tell you about another powerful classification algorithm, the one which nearly turned Neural Network into history (Neural Network was introduced quite very long ago, though). If you want to know what it is, stay updated for the next post! See you!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#classification" class="page__taxonomy-item" rel="tag">classification</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#decision-tree" class="page__taxonomy-item" rel="tag">decision-tree</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#essential" class="page__taxonomy-item" rel="tag">essential</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-26T00:00:00+05:30">October 26, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="pagination--pager" title="Machine Learning Part 7: Cross Validation
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Building-Desktop-For-Deep-Learning/" class="pagination--pager" title="Building up my own machine for Deep Learning
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

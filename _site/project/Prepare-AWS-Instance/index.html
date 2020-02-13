@@ -1,0 +1,874 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Preparing AWS’s instance to run Machine Learning’s projects - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Preparing AWS’s instance to run Machine Learning’s projects">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/">
+
+
+
+  <meta property="og:description" content="Hello there, it’s been a while since my previous Real time Object Recognition project. I currently have some cool stuff ongoing and I’ll share it to you when it’s ready (it won’t be long).">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-06T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Preparing AWS’s instance to run Machine Learning’s projects">
+    <meta itemprop="description" content="Hello there, it’s been a while since my previous Real time Object Recognition project. I currently have some cool stuff ongoing and I’ll share it to you when it’s ready (it won’t be long).">
+    <meta itemprop="datePublished" content="October 06, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Preparing AWS’s instance to run Machine Learning’s projects
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  4 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>Hello there, it’s been a while since my previous Real time Object Recognition project. I currently have some cool stuff ongoing and I’ll share it to you when it’s ready (it won’t be long).</p>
+
+<p>At the moment, I’m struggling with a frustrating performing problem. As I told you before in the previous <a href="https://mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/" target="_blank">Project</a>, the training process requires a powerful desktop which you have to spend a lot of money on, and may take a lot of time and resources. But this headache can be solved with a pre-trained model, like the one I used. And luckily, because using that model for recognizing object is not a big deal (as it took approximately 1.5 ~ 2 seconds per image on my PC), I still somehow felt satisfied.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>But life is not that easy. Things get tougher as you keep moving on. Now instead of 2 seconds, I have to wait for minutes for each image to be 100% processed, which is simply unacceptable! Of course, I can just throw $2000 on Amazon for a giant desktop with everything set up, rather than complaining to you on my blog (which may be boring you, I’m sorry). Yeah, I wish I had that money, dude!</p>
+
+<p>No way am I stopping. There must be some way out, I supposed. And I finally found it, Amazon Web Service (AWS).</p>
+
+<p>You can simply think of AWS as a place which offers desktop for rent. Of course, it costs! But it won’t cost you as much as buying a powerful giant desktop. You know, you are free to have our own choices. But I choose AWS, for now.</p>
+
+<p>And this post is for ones who consider to use AWS for running their own Machine Learning projects, just like me. Setting things up in AWS won’t be hard, but takes some time.</p>
+
+<p>Firstly, you have to register for AWS. You can do it by access to <a href="https://aws.amazon.com/" target="_blank">AWS Home Page</a>, then choose “Sign In to the Console”, you will be redirected to the page like this:</p>
+
+<p><img src="/images/projects/prepare-aws-instance/register.jpg" alt="Register page" /></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>After the registration completes, go back to AWS Home Page and sign in with your registered account. Here’s what you will see:</p>
+
+<p><img src="/images/projects/prepare-aws-instance/userpage.jpg" alt="User page" /></p>
+
+<p>On the top right, make sure you’re choosing N. California region. If it is somewhere else, change it to N. California.</p>
+
+<p>We will use EC2 instance, so choose EC2 (the first one in Compute category). You will see the following page showing up:</p>
+
+<p><img src="/images/projects/prepare-aws-instance/ec2.jpg" alt="EC2" /></p>
+
+<p>Click “Launch Instance”. Here’s where we will create our new instance, or you can also choose to use pre-configured one. You may wonder why. A new created instance is just like a new computer, with just OS installed. If you want to work with Python, you have to install Python, if you want to work with Caffe, you have to install and configure Caffe. Sounds challenging, right? In my case, although I got a few experiences working with environment configuration on my own PC, I don’t feel like doing it all over again, especially on a computer belonging to someone else. So I choose to use the pre-configured one! And I recommend you to do so.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>On the next page after clicking “Launch Instance”, choose “Community Instance” on the left, and type “cs231n” to the search bar. That’s the instance configured by Stanford University, which have Caffe, Torch, Theano, Keras, Lasagne installed, which means it’s already up and ready.</p>
+
+<p><img src="/images/projects/prepare-aws-instance/cs231n.jpg" alt="cs231n" /></p>
+
+<p>Click “Select”, on the next screen, scroll down to “g2.2xlarge” type. Select it and click “Review and Launch”. We are working on Machine Learning projects, which requires a great deal of parallel computing. And a GPU Instance’s type will be the best fit for that.</p>
+
+<p><img src="/images/projects/prepare-aws-instance/g22xlarge.jpg" alt="g22xlarge" /></p>
+
+<p>Simply click “Launch” on the next screen. At this step, AWS will require a key-pair authentication. Because this is the first time you launch, just select “Create a new key pair”, and type whatever you want to name that key. And click “Launch Instances”.</p>
+
+<p><img src="/images/projects/prepare-aws-instance/keypair.jpg" alt="keypair" /></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>You should then receive a .pem file which holds your key-pair information. Keep it safe because there’s no way to get it back once you lose it!</p>
+
+<p>At this point, you may receive an error, telling you that your account in under verification.</p>
+
+<p><img src="/images/projects/prepare-aws-instance/launch_failed.jpg" alt="launch_failed" /></p>
+
+<p>Just give it about 2 hours and try to launch again. Here’s what you will see after your account is verified:</p>
+
+<p><img src="/images/projects/prepare-aws-instance/launched.jpg" alt="launched" /></p>
+
+<p>After launching into the instance, it will take a while to initialize, so you have to wait until the status changes to “2/2 checks passed”:</p>
+
+<p><img src="/images/projects/prepare-aws-instance/running.jpg" alt="running" /></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Then take note the instance’s public IP address, open your local machine’s terminal, type:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ssh <span class="nt">-i</span> PEM_FILE ubuntu@PUBLIC_IP</code></pre></figure>
+
+<p>You will probably get an error like this:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">Permissions 0664 <span class="k">for </span>PEM_FILE are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key PEM_FILE: bad permissions</code></pre></figure>
+
+<p>That’s because your PEM file is accessible by all users. You must change the file’s permissions by typing:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">chmod </span>600 PEM_FILE</code></pre></figure>
+
+<p>Note that you must be in the folder where you placed you PEM_FILE.</p>
+
+<p>After that, you will now be able to log in and use the GPU instance everytime you want. Just don’t forget to <strong>Stop</strong> it when you finished your work, or your credit card bill payments will shock you till death. And note that there’s two different options: <strong>Stop</strong> and <strong>Terminate</strong>. <strong>Stop</strong> means to <em>Shut down</em>, while <strong>Terminate</strong> means to <em>Delete</em> the instance. You can read more <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingInstanceInitiatedShutdownBehavior" target="_blank">here</a> if you want to change the initiated Shutdown behavior, or <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#Using_ChangingDisableAPITermination" target="_blank">here</a> to disable the <strong>Terminate</strong> option.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>If you encounter any error during working with your instance, try to <em>Terminate</em> and start it all over again. Then everything should work just fine.</p>
+
+<p>That’s it. Simple enough, right? Hope you find this post helpful. And I’ll be back soon to reveal the cool stuff I’ve been doing to you.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#ami" class="page__taxonomy-item" rel="tag">AMI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#project" class="page__taxonomy-item" rel="tag">project</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#project" class="page__taxonomy-item" rel="tag">Project</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-06T00:00:00+05:30">October 06, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/" class="pagination--pager" title="Machine Learning Part 3: Linear Regression
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="pagination--pager" title="Machine Learning Part 4: Setting Up Python Environment for Computer Vision and Machine Learning
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

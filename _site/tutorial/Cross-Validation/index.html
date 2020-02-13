@@ -1,0 +1,982 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 7: Cross Validation - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 7: Cross Validation">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/">
+
+
+
+  <meta property="og:description" content="Hello there, so I’m here again to bring you the 7th post on my Machine Learning tutorial series. Today I will talk about Cross Validation, a term that you must know and mostly apply in all Machine Learning problems.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-24T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="active">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 7: Cross Validation">
+    <meta itemprop="description" content="Hello there, so I’m here again to bring you the 7th post on my Machine Learning tutorial series. Today I will talk about Cross Validation, a term that you must know and mostly apply in all Machine Learning problems.">
+    <meta itemprop="datePublished" content="October 24, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 7: Cross Validation
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  10 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Hello there, so I’m here again to bring you the 7th post on my Machine Learning tutorial series. Today I will talk about <strong>Cross Validation</strong>, a term that you must know and mostly apply in all Machine Learning problems.</p>
+
+<p>So, to go straight to the main topic, what is Cross Validation anyway? And why must we know about it? Why must we apply it to our Machine Learning problems? The simple answer is: because of <em>Overfitting</em>.</p>
+
+<p>Maybe my answer is so straight, and somehow confusing. Okay, let me fix that. Remember in the previous post on <a href="https://mahaveer0suthar.github.io/tutorial/Underfit-Overfit/" target="_blank">Underfitting and Overfitting Problems</a>, I talked about the two most common problems in Machine Learning? Underfitting is the problem when our algorithm failed to create a model that can fit the data, which means that our Model tends to give bad predictions even on the training dataset. Conversely, Overfitting is the problem which our Model fit training data so well that it tends to memorize all the features, therefore it performs badly on the data it has never seen.</p>
+
+<p>So, how do we at least foresee those problems before we can think about any solutions for them? As you might notice in the end of that post, I mentioned a little bit about <strong>splitting the dataset</strong>. Through the examples I showed you, it’s clear that we cannot just rely on the performance over the training data. We need a seperate dataset to use for performance evaluation, which assures that our Model has never seen before. That is the main idea of the term <strong>Cross Validation</strong>, which I will talk more further about today.</p>
+
+<p>I think that’s enough of talking. Let’s go down to business. Open your terminal, and get it started by initializing the data used in this post:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">X1_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">X1_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">X2_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">15</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X1_1</span><span class="p">)</span>
+<span class="n">X2_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X1_2</span> <span class="o">+</span> <span class="mi">15</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">X1_2</span>
+
+<span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X1_1</span><span class="p">,</span> <span class="n">X1_2</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X2_1</span><span class="p">,</span> <span class="n">X2_2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X1</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">X2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span></code></pre></figure>
+
+<p>Let’s have a look at our data by plotting it onto the coordinate:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'rainbow'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/images/tutorials/cross-validation/graph.png" alt="Graph_1" /></p>
+
+<p>You can see that now we have data of two classes which are linearly seperated (which means you can seperate them by a straight line). I don’t want to use any complicated data today, because I have just shown you two basic learning algorithms. Furthermore, the thing I want you to focus is <strong>cross validation</strong>, not how to create a sophisticated Model.</p>
+
+<p>Now with the data all set. Now what to do next? As I mentioned before, we will split our original dataset into two portions: one for training and one for testing. The standard splitting ratio is 70% for training data and 30% for test data (in other places, you can see they use another ratio such as 6:4, etc). So let’s do it. Here I will use the first 140 elements as training data, and the rest as test data.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">140</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">140</span><span class="p">:,</span> <span class="p">:]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">140</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">140</span><span class="p">:]</span></code></pre></figure>
+
+<p>Next, let’s create our Logistic Regression object and train the model using the split data above:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></code></pre></figure>
+
+<p>The training should take less than one second as usual. Now we have our Model learned. Let’s see how well it performs over the training dataset:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></code></pre></figure>
+
+<p>Using the training data to evaluate our Model gave me an accuracy of approximately 92.14%. Not bad, right? But I think you got experience now. You won’t speak a word until you see the performance over the test data, right?</p>
+
+<p>So let’s go on and grab the result on the test data:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span></code></pre></figure>
+
+<p>In my case, I got a result of 40%. That was a real <strong>NIGHTMARE</strong>, wasn’t it. You may shout out loud. Why do we still get that frustrating result, despite the fact that we used cross validation? Well, let’s calm down and figure out why.</p>
+
+<p>Obviously, our current Model performs unacceptably bad. In real life projects, that will be a headache that we must stay calm and find where the problem is (though it may not be easy). There are a lot of reasons which cause a bad performance over the test data, but the main reason is the data itself. So it’s a good idea to take a look at the test data, maybe we will find something wrong with it.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">y_test</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">])</span></code></pre></figure>
+
+<p>Wow! Since this is a two-class classification problem, having a test dataset which only contains labels from one class is somehow unsual. To make it more clear, let’s print out the training data:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">y_train</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>
+        <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>
+        <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">])</span></code></pre></figure>
+
+<p>I’d better show the training data, I think. As you can see, the training data above was split unequally between two classes. It means that one class has much more data than the other. What does it affect the learning process? The more data you provide, the better it learns. So our Model is likely to learn the \(0\) class better than the \(1\) class. It is even worse that our test data contains only data of the \(1\) class, which resulted in a very bad predicting accuracy as you saw. So obviously, it’s necessary to split the data equally between classes, or we will achive some Model that we cannot trust.</p>
+
+<h3 id="randomly-data-shuffling">Randomly data shuffling</h3>
+
+<p>One simple way to get our data equally split between classes is shuffling it. Shuffling data is a good practice, not only to make sure the data is split equally, but also make our learning algorithm work properly in other places such as stochastic gradient descent or something (you will know about it in later posts).</p>
+
+<p>Fortunately, <strong>scikit-learn</strong> library comes bundled with <em>train_test_split</em> method, which help us split the original data into training data and test data with a specific ratio, and of course, it makes sure that our data is well shuffled.</p>
+
+<p>So let’s import <em>train_set_split</em> method and use it to split our data:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span></code></pre></figure>
+
+<p>You can specify the <em>random_state</em> parameter to get a specific random sample. Here I omitted it so that I got a different set of data each time I call the <em>train_test_split</em> method.</p>
+
+<p>Let’s go ahead and make sure our data is now split equally between classes:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">32</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">28</span></code></pre></figure>
+
+<p>It’s not necessary that the number of data of each class is exactly the same as the other’s. So in my case, \(33:27\) is a reasonable ratio to me.If you find your data is not okay (let’s say \(35:25\)), then just re-run the method to get a better split. Simple enough, right?</p>
+
+<p>Next, let’s train the Model using our new dataset:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></code></pre></figure>
+
+<p>Check the result again:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="mf">0.9357142857142857</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="mf">0.9166666666666663</span></code></pre></figure>
+
+<p>Obviously, that’s just the result that we longed for. You may now realize that, it’s not just the algorithm which is important, the data itself does matter. With our dataset properly prepared, we can obtain a better result without tuning any learning parameters.</p>
+
+<p>I’m now so excited. Let’s do it one more time:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="mf">0.94285714285714284</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="mf">0.84999999999999999</span></code></pre></figure>
+
+<p>The result varied a little bit. But it does make me concern. Is there any chance that we missed something? Because we randomly split our data, what if we have been lucky to have a “good” split? Obviously, we cannot tell anything unless we have some way to cover all the cases, which means that all the data was split into test data at least once.</p>
+
+<p>Well, we will do that with a <em>for</em> loop. Since we are splitting with the ratio 7:3, we will call the <em>train_test_split</em> method four times in order to cover all the cases:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+  <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+  <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+  <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+<span class="p">[</span><span class="mf">0.93333333333333335</span><span class="p">,</span> <span class="mf">0.96666666666666667</span><span class="p">,</span> <span class="mf">0.83333333333333337</span><span class="p">,</span> <span class="mf">0.98333333333333328</span><span class="p">]</span></code></pre></figure>
+
+<p>Doing this way, we can have a better visualization of testing accuracy over the whole testing data. Obviously, the results varied a little, but that was something we could predict. And since there’s no significantly difference between those numbers, we can now feel relieved a little, right?</p>
+
+<p>Here comes another question. Will the <em>train_test_split</em> perform well with multi-class classification problem? Let’s say now we have five classes, let’s see how well it can do:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span></code></pre></figure>
+
+<p>Here we got five classes from \(0\) to \(4\), each class has 40 examples. Now we will use the <em>train_test_split</em> to split our data. Let’s see if it can split equally between five classes:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">11</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">5</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">20</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">8</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y_test</span><span class="o">==</span><span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="mi">16</span></code></pre></figure>
+
+<p>You might not expect it, but the performance was poor. Now we may wonder it the <strong>scikit-learn</strong> provides us some other cool module instead. Yeah, it does!</p>
+
+<h3 id="stratifiedkfold-and-cross_val_score">StratifiedKFold and cross_val_score</h3>
+
+<p><strong>scikit-learn</strong> library provides us a module called <strong>StratifiedKFold</strong>. As its name is self-explained, it will divide the original data into <em>f</em> folds, make sure that each fold contains the same amount of data from all classes.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span></code></pre></figure>
+
+<p>Let’s see how our data is split using StratifiedKFold. Since we have 200 examples, with 40 examples each class, we will set <em>n_folds</em> equal to 5:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">k</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])</span></code></pre></figure>
+
+<p>Here’s the first line of the output I got:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span> <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">1.</span>  <span class="mf">2.</span>  <span class="mf">2.</span>
+  <span class="mf">2.</span>  <span class="mf">2.</span>  <span class="mf">2.</span>  <span class="mf">2.</span>  <span class="mf">2.</span>  <span class="mf">2.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">3.</span>  <span class="mf">4.</span>  <span class="mf">4.</span>  <span class="mf">4.</span>  <span class="mf">4.</span>
+  <span class="mf">4.</span>  <span class="mf">4.</span>  <span class="mf">4.</span>  <span class="mf">4.</span><span class="p">]</span></code></pre></figure>
+
+<p>As you can see, using StratifiedKFold we got our data split equally between five classes. With the data well split, we can be sure that our Model will likely learn much better.</p>
+
+<p><strong>scikit-learn</strong> library also provides us a method called <strong>cross_val_score</strong>. What it does is first, splitting our Model using StratifiedKFold, and second, looping through all <em>k</em> folds then compute the corresponding accuracy score, which means that we don’t have to write the loop ourselves anymore. So great, right?</p>
+
+<p>All we have to do is to pass our Model, our original \(X\), our original \(y\), number of folds we want it to split through the <em>cv</em> parameter. And it does all the rest for us!</p>
+
+<p>Note that before that, we must restore our \(y\) vector, since I used it above for demonstration. My bad, sorry!</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="p">[</span> <span class="mf">0.78</span>  <span class="mf">0.96</span>   <span class="mf">0.98</span>  <span class="mf">0.9</span><span class="p">]</span></code></pre></figure>
+
+<p>The result we got here is not much different than the one above, since this is a two-class classification problem, using StratifiedKFold is not likely to improve that much. But it is recommended using StratifiedKFold (through the cross_val_score method), rather than use the train_test_split and then write the loop yourselves.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>So, today I have told you about <strong>cross validation</strong>. Now you know the right way to split the data for training and testing purposes. You also know the need of shuffling the dataset before splitting. And after all, you know how to efficiently split the data using StratifiedKFold and use cross_val_score method to help us perform testing over the whole dataset.</p>
+
+<p>With that, you will know have a valuable tool to evaluate your trained Model, and can tell whether it tends to overfit or not. In future post, after I show you some more powerful algorithms, we will continue with some techniques to prevent overfitting. Until then, stay updated and I will be back soon! See you!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#cross-validation" class="page__taxonomy-item" rel="tag">cross validation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#cross-val-score" class="page__taxonomy-item" rel="tag">cross_val_score</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#data-splitting" class="page__taxonomy-item" rel="tag">data splitting</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#overfitting-dianosic" class="page__taxonomy-item" rel="tag">overfitting dianosic</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#stratifiedkfold" class="page__taxonomy-item" rel="tag">stratifiedkfold</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#train-test-split" class="page__taxonomy-item" rel="tag">train_test_split</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-24T00:00:00+05:30">October 24, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/" class="pagination--pager" title="Machine Learning Part 6: Logistic Regression
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Decision-Tree/" class="pagination--pager" title="Machine Learning Part 8: Decision Tree
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

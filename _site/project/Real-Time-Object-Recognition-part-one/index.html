@@ -1,0 +1,917 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Real Time Object Recognition (Part 1) - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Real Time Object Recognition (Part 1)">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/">
+
+
+
+  <meta property="og:description" content="Technology sometimes seems like magic, especially when we don’t have any idea about how it was done, or we even think it can’t be done at all.When I was a kid, I was a huge fan of Sci-Fi Films, which were on every TV channel in the 1990s in my country. They did inspire me a lot, help grow up an “engineering mindset” in me.Being an engineer sometimes makes me feel so great, because I can mostly understand many things that seem to be magical to others. But to be honest, there are still lots of things out there can make me feel like a fool. Just let me tell you one of them.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-09-26T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Real Time Object Recognition (Part 1)">
+    <meta itemprop="description" content="Technology sometimes seems like magic, especially when we don’t have any idea about how it was done, or we even think it can’t be done at all.When I was a kid, I was a huge fan of Sci-Fi Films, which were on every TV channel in the 1990s in my country. They did inspire me a lot, help grow up an “engineering mindset” in me.Being an engineer sometimes makes me feel so great, because I can mostly understand many things that seem to be magical to others. But to be honest, there are still lots of things out there can make me feel like a fool. Just let me tell you one of them.">
+    <meta itemprop="datePublished" content="September 26, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Real Time Object Recognition (Part 1)
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  6 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>Technology sometimes seems like magic, especially when we don’t have any idea about how it was done, or we even think it can’t be done at all.
+When I was a kid, I was a huge fan of Sci-Fi Films, which were on every TV channel in the 1990s in my country. They did inspire me a lot, help grow up an “engineering mindset” in me.
+Being an engineer sometimes makes me feel so great, because I can mostly understand many things that seem to be magical to others. But to be honest, there are still lots of things out there can make me feel like a fool. Just let me tell you one of them.</p>
+
+<p>It was sometime in 2015, I watched a demo video from a startup company in Japan. It was about Object Recognition using Deep Learning. At that time, I didn’t even have any idea about what Machine Learning is, not to mention Deep Learning! 
+My thought then? “That was impossible. How did they do that?”
+I kept questioning myself for a while. I just couldn’t get it out of my mind. But unfortunately, because my first thought was “That was impossible”, or at least “That was impossible to me”, I gave it up, left the mystery unrevealed.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>It was not until I paid serious attention to Machine Learning that I somehow made the mystery become clear. As I was working around with Convolutional Neural Network, then I suddenly thought of the mystery I gave up one year ago. I mean, that was really exciting and crazy. (Feels like Mission 6 accomplished to me, lol)</p>
+
+<p>Seems like a pretty long beginning (I didn’t mean to write a preface for my book or something, though). So I am here to share my work. In fact, it was not something impresssive (especially when comparing to outstanding projects out there). But I really hope this post can help, especially for ones who have enthusiasm in Machine Learning and once came accross something like me before.</p>
+
+<p>In this project, I will try to reproduce the result I saw in the demo video one year ago. Concretely, I will move the camera around a table, with many objects put on it. The computer will try to recognize each object, and print the object’s label in the output of the camera.</p>
+
+<p>Writing it all in one post may hurt, so I separate this project into two parts like below:</p>
+
+<ul>
+  <li>Part 1: Go through the folder containing the images, recognize object in each.</li>
+  <li>Part 2: Real time object recognition through input from camera</li>
+</ul>
+
+<p>Before I begin, let’s talk a little bit about how Machine Learning works. I had post about what Machine Learning exactly is, and how it exactly works here: <a href="https://mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" target="_blank">What is Machine Learning?</a></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>The main part of any Machine Learning system, is the Model. It contains the algorithms and all the associated parameters. A good Model will produce a good prediction. Because of that, the training process (i.e. the process which produces the Model) can be heavily computational and take a lot of resources (you know, RAM and memories to store the parameters).</p>
+
+<p>Fortunately, a great work from <a href="https://github.com/fchollet" target="_blank">François Chollet</a> helps make this problem become much more relaxing than ever. I mean that you won’t have to spend a great deal of money on a giant computer (with powerful CPU and GPUs), you won’t have to spend time on training the data yourself, thanks to François Chollet for providing us the pretrained Model on the most outstanding CNN architectures. Sounds cool, right? Among those, I will use the VGG16 Model for this project.</p>
+
+<p>So, let’s get down to business.</p>
+
+<p>Firstly, I downloaded some images for testing purpose, and put them in the same folder.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-f"</span><span class="p">,</span> <span class="s">"--folder"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">"folder"</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">"folder"</span><span class="p">])]</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">files</span><span class="p">)</span></code></pre></figure>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>As written in the code above, I passed the folder name, then got the list of file names stored in <em>files</em> variable. I shuffled the list for demonstration purpose (you don’t want the same order everytime, right?)</p>
+
+<p>Next, I initiate the VGG16 Model, provided by François Chollet. You will have to clone his repository first, from <a href="https://github.com/fchollet/deep-learning-models" target="_blank">here</a></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">vgg16</span> <span class="kn">import</span> <span class="n">VGG16</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">VGG16</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s">"imagenet"</span><span class="p">)</span></code></pre></figure>
+
+<p>As you can see we are passing the <em>weights=”imagenet”</em> parameter, to tell the Model to initialize with pretrained parameter set. It is quite a large file (approximately 550MB), so it will take some time to download on its first run. (The parameter set is saved somewhere in keras’ temporary folder)</p>
+
+<p>Then, I looped through the file list created above, in each iteration:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">image</span> <span class="k">as</span> <span class="n">image_utils</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">image_utils</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image_utils</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></code></pre></figure>
+
+<p>Keras provides us a method for loading image for training and testing purpose. Note that OpenCV and Keras treat the input image in different ways, so we cannot use image loaded by OpenCV’s imread method for Keras. Concretely, let’s say we have a 3-channel image (a common color image). OpenCV’s imread will produce an (width, height, 3) array, whereas Keras requires an (3, width, height) format.
+Another way to solve this is to use Numpy’s tranpose method:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></code></pre></figure>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>I prefer the second approach, you will understand why when we come to the second part of this project.</p>
+
+<p>Next, we need to add one more dimension to the array obtained above. Why we have to do that? If you have experience with Neural Network, you may find the term <em>mini_batch</em> similar. The additional dimension will tell the Model the number of input arrays (for example, you have 70,000 data, so you need to pass an array with shape (70000, depth, width, height) for the Model to run on, let’s say SGD or RMSprop or something).</p>
+
+<p>If you don’t have any idea about what I’ve just talked, you can ignore it for now. I’ll talk about Neural Network in later posts, I promise.</p>
+
+<p>After converting the input image to Keras’s format, I passed it through a pre-processing method:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">imagenet_utils</span> <span class="kn">import</span> <span class="n">preprocess_input</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">preprocess_input</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></code></pre></figure>
+
+<p>The pre-processing method came along with the models provided by François Chollet. It simply subtracts each channel with its mean value, and solve the ordering conflict between Theano and Tensorflow.</p>
+
+<p>So we now have things ready. Let’s pass the preprocessed array to the Model and get it predicted:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">preds</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="p">(</span><span class="n">inID</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="o">=</span> <span class="n">decode_predictions</span><span class="p">(</span><span class="n">preds</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></code></pre></figure>
+
+<p>Let’s talk a little bit about ImageNet’s image database (the database on which VGG16 was trained). It was organized according to WordNet hierarchy (you can find more details <a href="http://wordnet.princeton.edu/" target="_blank">here</a>). But the predicting result is always numerical (Neural Network only works with numerical labels), so we have to map between the numerical result, and the noun provided by WordNet.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="4068904466" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>Once again, François Chollet provided a method to do that: decode_predictions method. It simply map the predicted result with a JSON file, and return the associated noun instead. Here’s what the JSON file looks like:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="nl">"0"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01440764"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tench"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01443537"</span><span class="p">,</span><span class="w"> </span><span class="s2">"goldfish"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01484850"</span><span class="p">,</span><span class="w"> </span><span class="s2">"great_white_shark"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"3"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01491361"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tiger_shark"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"4"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01494475"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hammerhead"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"5"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01496331"</span><span class="p">,</span><span class="w"> </span><span class="s2">"electric_ray"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"6"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01498041"</span><span class="p">,</span><span class="w"> </span><span class="s2">"stingray"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"7"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01514668"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cock"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"8"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01514859"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hen"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"9"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01518878"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ostrich"</span><span class="p">],</span><span class="w"> 
+ </span><span class="nl">"10"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"n01530575"</span><span class="p">,</span><span class="w"> </span><span class="s2">"brambling"</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="p">}</span></code></pre></figure>
+
+<p>Finally, the easiest part: load the input image with OpenCV’s imread, then put the label found above on it, then show the result. And we are DONE!</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">origin</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="s">"Predict: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">label</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">"Result"</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span></code></pre></figure>
+
+<p>Here are some results I got from my test images:</p>
+
+<p><img src="/images/projects/real-time-object-recognition/1.jpg" alt="Image_1" /></p>
+
+<p><img src="/images/projects/real-time-object-recognition/2.jpg" alt="Image_2" /></p>
+
+<p>So I’ve just walked through the first part of the Real time Object Recognition project. You may think that it’s not a big deal anyway. But in my opinion, it did help a lot in visualizing some real work on Object Recognition using Convolutional Neural Network. Just implementing the code to use the model may not take you some months to work on, but importantly, it now doesn’t seem like magic anymore.</p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- MidPageAds2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3852793730107162" data-ad-slot="2275566366" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p>That’s all for part 1. Hope you enjoy it. In part 2, I will continue with real time object recognition through continuous input from camera. So stay updated and I’ll see you there.</p>
+
+<p>You can find the second part of this post here: <a href="https://mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" target="_blank">Real Time Object Recognition (Part 2)</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#learning" class="page__taxonomy-item" rel="tag">learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#object-recognition" class="page__taxonomy-item" rel="tag">object recognition</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#project" class="page__taxonomy-item" rel="tag">project</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#vgg" class="page__taxonomy-item" rel="tag">VGG</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#project" class="page__taxonomy-item" rel="tag">Project</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-09-26T00:00:00+05:30">September 26, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-one/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Types-Of-Learning/" class="pagination--pager" title="Machine Learning Part 2: Types of Learning
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="pagination--pager" title="Real Time Object Recognition (Part 2)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,992 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 3: Linear Regression - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 3: Linear Regression">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/">
+
+
+
+  <meta property="og:description" content="Here we are again, in the third post of Machine Learning’s tutorials. Today I’m gonna tell you about Linear Regression, the most common and understandable learning algorithm. This time I will dig more deeper so that after this post, you will know what actually happened during the learning process. So no more Dogs and Cats today, but algebraic stuff. Yeah, we’re gonna work with matrices, from now on. But don’t worry, it’s not gonna be so hard today.As I told you before, we got some training data containing Features and Labels. Features are somewhat distinct which can be used to distinguish between things.">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-01T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 3: Linear Regression">
+    <meta itemprop="description" content="Here we are again, in the third post of Machine Learning’s tutorials. Today I’m gonna tell you about Linear Regression, the most common and understandable learning algorithm. This time I will dig more deeper so that after this post, you will know what actually happened during the learning process. So no more Dogs and Cats today, but algebraic stuff. Yeah, we’re gonna work with matrices, from now on. But don’t worry, it’s not gonna be so hard today.As I told you before, we got some training data containing Features and Labels. Features are somewhat distinct which can be used to distinguish between things.">
+    <meta itemprop="datePublished" content="October 01, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 3: Linear Regression
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  11 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Here we are again, in the third post of Machine Learning’s tutorials. Today I’m gonna tell you about Linear Regression, the most common and understandable learning algorithm. This time I will dig more deeper so that after this post, you will know what actually happened during the learning process. So no more Dogs and Cats today, but algebraic stuff. Yeah, we’re gonna work with matrices, from now on. But don’t worry, it’s not gonna be so hard today.
+As I told you before, we got some training data containing Features and Labels. Features are somewhat distinct which can be used to distinguish between things.</p>
+
+<p><img src="/images/tutorials/what-is-machine-learning/5.jpg" alt="Image_1" /></p>
+
+<p>Remember this? To recall a little bit, I called ‘X’ Features, ‘y’ Labels, and ‘a’ Prediction. It may get your attention here, but it’s just a naming convention, which X is always in uppercase, and y is lowercase.</p>
+
+<p>So after collecting a great deal of training data (X, y), we have them learned by the computer. Then we show the data which the computer has never seen before, which contains only X this time, and the computer will give us a prediction, called ‘a’.</p>
+
+<p>I just helped you to recall about what Machine Learning is. But I think it would be better if you have a further look about Machine Learning on my first post here: <a href="https://mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" target="_blank">What  is Machine Learning?</a></p>
+
+<p>So from the image above, the first thing coming to our minds is, how the computer can compute <em>y</em> from <em>X</em> during the learning process, and how it can compute prediction <em>a</em> from <em>X</em>?</p>
+
+<p>Well, we will continue from what we were doing on the first post. The answer to the question above is: we need an learning algorithm. And in order to make an algorithm work, we need something called Activation Function.</p>
+
+<h3 id="activation-function">Activation Function</h3>
+
+<p><img src="/images/tutorials/what-is-machine-learning/9.jpg" alt="Image_1" /></p>
+
+<p>Here’s where we left off in the first post. The reason why I mentioned it to you because you will face the term Activation Function not only in Linear Regression, or Logistic Regression in later post, but also in the more complicated algorithms which you will learn in the future. So, what is Activation Function? That’s a function which takes <em>X</em> as variable, and we use it to compute the prediction <em>a</em>.</p>
+
+<p>In case of Linear Regression, the Activation Function is so simple that it’s not considered an Activation Function at all!</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+  h_\theta(X^{(i)})=\theta_0+\sum_{j=1}^m\theta_jX_j^{(i)}=\theta_0+\theta_1X_1^{(i)}+\theta_2X_2^{(i)}+\cdots+\theta_nX_n^{(i)}
+\end{align*}</script>
+
+<p>I’ll explain the equation above. First, the superscript and the subscript on each <em>X</em>, what do they mean? Imagine we have a training dataset which has 10 examples, each example has 4 features, so the superscript will indicate the <em>ith</em> example, and the subscript will indicate the <em>jth</em> feature. You will be used to this convention soon, so don’t worry if you can’t get that right now.</p>
+
+<p>For the sake of simplicity, let’s consider an example, where we have 10 examples, each example only contains one feature. So the Activation Function will look like this:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+  h_\theta(X^{(i)})=\theta_0+\theta_1X_1^{(i)}
+\end{align*}</script>
+
+<p>Does it look similar to you? Yeah, that’s exactly a linear equation with one variable which you learned a lot at high school. If we plot it on the coordinate plane, we will obtain a straight line. That’s the idea of Linear Regression.</p>
+
+<p>Imagine our training data look like this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If we plot them on the coordinate plane, we will obtain something like this:</p>
+
+<p><img src="/images/tutorials/linear-regression/1.jpg" alt="Training_data" /></p>
+
+<p>So, our mission now, is to find an appropriate function which can best fit those points. In case of Linear Regression with one variable, because the activation function is actually a straight line, so we will have to find a straight line which can almost go through all those points, intuitively.</p>
+
+<p>But, how do we start? Well, we will start by randomizing all the parameters, which means \( \theta_0,\theta_1 \). So let’s set them both to <em>1</em>. Now we can compute <em>a</em> by activation function: \(a=1+x\). Now if we plot <em>X</em>, <em>y</em>, and the straight line \(a=1+x\), we will have something like this:</p>
+
+<p><img src="/images/tutorials/linear-regression/2.jpg" alt="Randomized_function" /></p>
+
+<p>Obviously, the straight line we obtain from \(a=1+x\) doesn’t fit our training data well. But that’s OK because we just began by randomizing the parameters, and no learning was actually performed. So here comes the next question: how can we improve the activation function so that it can fit the data better? Or I can say it differently: how can we make the computer learn to fit the data?</p>
+
+<p>Obviously, we must think of some way to evaluate how well the current function is performing. One way to accomplish this task is to compute Cost Function, which takes the difference between the Label and the prediction as its variable. And among many types of Cost Function, I will introduce to you the Mean Squared Error Function, which is the most appropriate approach for Linear Regression, and yet maybe the simplest one for you to understand.</p>
+
+<h3 id="mean-squared-error-function">Mean Squared Error Function</h3>
+
+<p>Firstly, let’s see what Mean Squared Error Function (MSE) looks like:</p>
+
+<script type="math/tex; mode=display">\begin{align*}
+  J(\theta)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2=\frac{1}{2m}\sum_{i=1}^m(a^{(i)}-y^{(i)})^2
+\end{align*}</script>
+
+<p>Now everything has just become clear. It computes the mean value of the squared errors, which are the differences between the  Prediction \( h_\theta(X^{(i)}) \) and the Label \( y^{(i)} \). You can see that if the value of \( J(\theta) \) is large, it means that the difference between the Prediction and the Label is also large, which causes the straight line can not fit the training data well. In contrast, if the value of \( J(\theta) \) is close to zero, it means that the Prediction and the Label lie very closely in the coordinate plane, which we can tell that the straight line obtained from the activation function fits the training data pretty well.</p>
+
+<p>Here you may have a question: why don’t we just take mean value of the difference between Prediction and Label? Why must we use the squared value instead? Well, there’s no “must” here. In this case the squared error works just fine, so it was chosen. There’s no problem if we just use the difference instead. But let’s consider this case. Imagine you have \( a^{(1)}=2 \), \( y^{(1)}=4 \) and \( a^{(2)}=5 \), \( y^{(1)}=3 \). What will happen in both cases?</p>
+
+<p>No squared error:
+<script type="math/tex">J(\theta) = \frac{1}{2*2}((2-4)+(5-3)) = \frac{1}{2*2}(-2+2) = 0</script></p>
+
+<p>With squared error:
+<script type="math/tex">J(\theta) = \frac{1}{2*2}((2-4)^2+(5-3)^2) = \frac{1}{2*2}(4+4) = 2</script></p>
+
+<p>As you can see, the MSE will accumulate the error without caring the sign of the error, whereas the Mean Error is likely to omit the error like the example above. Of course, in another place, using the Mean Error instead of MSE will somehow make some sense, but that’s beyond the scope of this post, so I’ll talk about it when I have chance.</p>
+
+<p>So, through MSE value, we can somehow evaluate how well the activation function is performing, or how well the straight line obtained by the same function is fitting our training data. Then what will we do in the next step? We’ll come to a new concept called, Gradien Descent. Keep going, you’re half way there!</p>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p>Before digging deeper into Gradient Descent. Let’s look back our MSE function:</p>
+
+<script type="math/tex; mode=display">J(\theta)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2=\frac{1}{2m}\sum_{i=1}^m(a^{(i)}-y^{(i)})^2</script>
+
+<p>Note that our cost function takes \( \theta \) as its variable, not \( X^{(i)} \). For the sake of simplicity, let’s say \( \theta \) contains only \( \theta_1 \). Then our cost function will look like below:</p>
+
+<script type="math/tex; mode=display">J(\theta)=\frac{1}{2m}[(\theta_1X_1^{(1)}-y^{(1)})^2+(\theta_1X_1^{(2)}-y^{(2)})^2+\dots]=A\theta_1^2+B\theta_1+C</script>
+
+<p>As you can see, our cost function now becomes a quadratic function with \( \theta_1 \) variable. Let’s take one more step, when we plot a quadratic function, we will obtain some figure like this:</p>
+
+<p><img src="/images/tutorials/linear-regression/3.jpg" alt="Quadratic function" /></p>
+
+<p>A picture’s worth a thousands word, right? Our learning objective is to find the parameter \( \theta \) so that we can draw a straight line which can almost go through all the points in the coordinate plane. In order to accomplish that, we compute a Cost Function (in this case we use the MSE function). We want the value of the Cost Function to be as small as possible.</p>
+
+<p>As we can see in the figure above, our Cost Function is now a quadratic function \( A\theta^2+B\theta+C \). Because we have \( A&gt;0 \), so that our Cost Function is a <a href="https://en.wikipedia.org/wiki/Convex_function" target="_blank">convex function</a>. You can think of a convex function as some function which has one or many minima. In the case of quadratic function with one variable, our Cost Function only has one minimum. Obviously, all we have to do now, is to find that minimum’s value. But how will we do that? Let’s consider the next figure:</p>
+
+<p><img src="/images/tutorials/linear-regression/4.jpg" alt="Gradien Descent" /></p>
+
+<p>You may remember that earlier in this post, we started by randomize the parameter \( \theta \). So with that randomized value, let’s say some value which is far from the minimum. How is it supposed to go down to the minimum? Oops, you already got it right. It just simply goes down, step by step. But mathematically, how can we force it to go down?</p>
+
+<p>Look at the first arrow to the right a little bit. You may find it very familiar, there’s something that is equal to the slope of the tangent line of the Cost Function of the starting point. I’ll help you this time: that is Derivatives. To be more exact, when \( J(\theta) \) is the function of multiple variables, instead of saying Derivatives, we will use the term: Gradient. Gradient is actually a vector whose elements are Partial Derivatives. Find it hard to understand?</p>
+
+<ul>
+  <li>
+    <p>Derivative (one-variable function):<br />
+<script type="math/tex">\frac{\mathrm d}{\mathrm d\theta}J(\theta)</script></p>
+  </li>
+  <li>
+    <p>Gradient (multiple-variable function):<br />
+<script type="math/tex">\nabla J(\theta)=\begin{bmatrix}\frac{\partial}{\partial \theta_1}J(\theta)\\\frac{\partial}{\partial \theta_2}J(\theta)\\\vdots\\\frac{\partial}{\partial \theta_n}J(\theta)\\\end{bmatrix}</script></p>
+  </li>
+</ul>
+
+<p>I think I’m not going any further in explaining what is behind the Gradient. You can just think of it as a way to tell the computer: which direction to move its next step from the current point. With the right direction, it will gradually make it closer and closer to the minimum, and when it’s finally there, we will have our Cost Function reach its minimum value, and as a result, we will have our final Activation Function which can best fit our training data.</p>
+
+<p>So now you might understand how exactly the learning process occurs. Here comes the final step: how does the computer update the parameters to move towards the next point on the Cost Function \( J(\theta) \) graph?</p>
+
+<h3 id="parameter-update">Parameter Update</h3>
+<p>With the Gradient \( \nabla J(\theta) \) obtained above, we will perform update on the parameters like below:</p>
+
+<script type="math/tex; mode=display">\theta=\theta-\alpha\nabla J(\theta)</script>
+
+<p>Note that bote \( \theta \) and \( \nabla J(\theta) \) are vectors, so I can re-write the equation above like this:</p>
+
+<script type="math/tex; mode=display">\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\theta_n\end{bmatrix}=\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\theta_n\end{bmatrix}-\alpha\begin{bmatrix}\frac{\partial}{\partial\theta_0}J(\theta)\\\frac{\partial}{\partial\theta_1}J(\theta)\\\vdots\\\frac{\partial}{\partial\theta_n}J(\theta)\end{bmatrix}</script>
+
+<p>You may see the newcomer \( \alpha \). It’s called <em>learning rate</em>, which indicates how fast the parameters are updated at each step. Simply, if we set \( \alpha \) to be large, then it’s likely to go down faster, and reach the desired minimum faster, and vice versa, if \( \alpha \) is too small, then it will take more time until it reach the minimum. So you may ask, why don’t we just make \( \alpha \) large? Well, learning with large <em>learning rate</em> is always risky. Consider the figure below:</p>
+
+<p><img src="/images/tutorials/linear-regression/5.jpg" alt="Unreachable minumum" /></p>
+
+<p>As you might see, if we set our <em>learning rate</em> too large, then it will behave unexpectedly, and likely never reach the minimum. So my advice is, try to set \( \alpha \) to be small at first (but not too small), then see whether it worked or not. Then you can think about increasing \( \alpha \) gradually to improve the performance.</p>
+
+<p>After you know what the learning rate \( \alpha \) is. The last question (I hope) you may ask is: how do we compute the Gradient? That’s pretty easy, since our MSE function is just a quadratic function. You can compute the Partial Derivatives using the <a href="https://en.wikipedia.org/wiki/Chain_rule" target="_blank">Chain Rule</a>. It may take some time to compute, so I show you the result right below. You can confirm it yourselves afterwards.</p>
+
+<ul>
+  <li>For weights (\( \theta_1, \ldots, \theta_n\))</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_j}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_j^{(i)}</script>
+
+<p>There’s one more thing I want remind you: Weights and Bias. As I said in the first post, Weights are parameters which associate with X, and Bias is parameter which stands alone. So I show you above how to update the Weights. What about the Bias? Because Bias doesn’t associate with X, so its Partial Derivative doesn’t, either.</p>
+
+<ul>
+  <li>For bias (\( \theta_0 \))</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_0}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)})</script>
+
+<p>Until this point, you may understand why we use \( \frac{1}{2m} \) instead of \( \frac{1}{m} \) in the MSE function. Because it’s a quadratic function, using \( \frac{1}{2m} \) will make it easier for computing Partial Derivative. Everything happens for some reason, right?</p>
+
+<p>Now let’s put things together. Here’s what we have:</p>
+
+<script type="math/tex; mode=display">\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\theta_n\end{bmatrix}=\begin{bmatrix}\theta_0\\\theta_1\\\vdots\\\theta_n\end{bmatrix}-\frac{\alpha}{m}\begin{bmatrix}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)})\\\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_1^{(i)}\\\vdots\\\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_n^{(i)}\end{bmatrix}</script>
+
+<p>Seems like a mess, huh? The best way to understand something is doing something with it. Now let’s solve the problem above, we will try to make the straight line to fit our training points.</p>
+
+<ol>
+  <li>Parameters Initialization:<br />
+As above, we initialized \(\theta_0=1\), \(\theta_1=1\). We will compute our Cost Function \( J(\theta) \).</li>
+</ol>
+
+<script type="math/tex; mode=display">J(\theta) = \frac{1}{2*10}\sum_{i=1}^{10}(X^{(i)} + 1 - y^{(i)})^2=38.34</script>
+
+<p>At starting point, our Cost Function’s value is unacceptably large. So we have to update our parameters using Gradient Descent. Let’s do it now.</p>
+
+<p>Let’s set the learning rate \( \alpha=0.03 \), here’s the new parameters after we performed the update:</p>
+
+<p><script type="math/tex">\theta_0 = \theta_0 - \frac{\alpha}{10}\sum_{i=1}^m(X^{(i)} + 1 - y^{(i)})=1.25</script>
+<script type="math/tex">\theta_1 = \theta_1 - \frac{\alpha}{10}\sum_{i=1}^m(X^{(i)} + 1 - y^{(i)}).X^{(i)}=2.55</script></p>
+
+<p>With the new parameters, let’s re-compute the Cost Function:</p>
+
+<script type="math/tex; mode=display">J(\theta) = \frac{1}{2*10}\sum_{i=1}^{10}(2.55*X^{(i)} + 1.25 - y^{(i)})^2=4.89</script>
+
+<p>You can see that our Cost Function’s value has dropped significantly after just one update step. Let’s plot our new Activation Function to see how well it improved:</p>
+
+<p><img src="/images/tutorials/linear-regression/6.jpg" alt="Update 1" /></p>
+
+<p>Eh, there’s still much room for improvement. Doing similarly until the forth step, here’s what we got:</p>
+
+<p><script type="math/tex">\theta_0 = 1.28</script><br />
+<script type="math/tex">\theta_1 = 2.30</script><br />
+<script type="math/tex">J(\theta) = 3.72</script></p>
+
+<p>Let’s plot it onto the coordinate plane:</p>
+
+<p><img src="/images/tutorials/linear-regression/7.jpg" alt="Update 4" /></p>
+
+<p>As you can see, we now have our straight line which can fit our training data fairly well. And if we run the update few more rounds, you may see that our Cost Function still keeps decreasing but with just slight changes. And we can barely visualize the improvement in the graph. Obviously, we just can’t ask for more in case of a straight line. And since this is the simplest algorithm that I used to explain the learning process, I hope you can now understand what is actually “behind the scenes” and visualize the learning process.</p>
+
+<p>In the next post, I’ll continue with the second part on Linear Regression. I’ll show you how we can improve the performance of Linear Regression, and we will, finally, using Python’s powerful libraries to help us complete the implementation.</p>
+
+<p>That’s it for today. Drop me a line if you have any question. See you in the next post!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#cost-function" class="page__taxonomy-item" rel="tag">cost-function</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#gradient-descent" class="page__taxonomy-item" rel="tag">gradient-descent</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#linear-regression" class="page__taxonomy-item" rel="tag">linear-regression</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-01T00:00:00+05:30">October 01, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Linear-Regression/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="pagination--pager" title="Real Time Object Recognition (Part 2)
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Prepare-AWS-Instance/" class="pagination--pager" title="Preparing AWS’s instance to run Machine Learning’s projects
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

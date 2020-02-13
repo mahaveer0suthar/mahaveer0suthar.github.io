@@ -1,0 +1,968 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3852793730107162",
+        enable_page_level_ads: true
+      });
+    </script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Machine Learning Part 6: Logistic Regression - Mahaveer Senior Deep Learning Engineer</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="Mahaveer Senior Deep Learning Engineer">
+<meta property="og:title" content="Machine Learning Part 6: Logistic Regression">
+
+
+  <link rel="canonical" href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/">
+  <meta property="og:url" content="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/">
+
+
+
+  <meta property="og:description" content="Hello there, I am back with you today. In the 6th post on Machine Learning tutorials series, I will tell you about Logistic Regression, a very important and must-know algorithm. Before I go any further, there is one thing I want you to be clear at first. The algorithm’s name, Logistic Regression, is somehow confusing a little bit, but we are not dealing with a regression problem, but a classification problem.">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="http://localhost:4000/mahaveer0suthar.github.io/images/tutorials/logistic-regression/graph_3.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-10-18T00:00:00+05:30">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Mahaveer Suthar",
+      "url" : "http://localhost:4000/mahaveer0suthar.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Mahaveer Senior Deep Learning Engineer Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/mahaveer0suthar.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="http://localhost:4000/mahaveer0suthar.github.io/">Mahaveer Senior Deep Learning Engineer</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorials/">Tutorials</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/portfolio/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/about/">About</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://localhost:4000/mahaveer0suthar.github.io/terms/">Terms and Privacy Policy</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/mahaveer0suthar.github.io/images/bio-photo.jpg" class="author__avatar" alt="Mahaveer Suthar">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Mahaveer Suthar</h3>
+    <p class="author__bio">Senior Deep Learning Engineer</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> New Delhi, India</li>
+      
+      
+      
+        <li><a href="mailto:mahaveer0suthar@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/mahaveer0suthar"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+        <li><a href="https://plus.google.com/+mahaveer0suthar"><i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/mahaveer0suthar"><i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://www.xing.com/profile/Mahaveer_Suthar"><i class="fa fa-fw fa-xing-square" aria-hidden="true"></i> XING</a></li>
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="https://www.stackoverflow.com/users/9073242/mahaveer-suthar"><i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+    
+    
+      
+
+
+<nav class="nav__list">
+  
+  <ul>
+    
+      <li>
+        
+          <span class="nav__sub-title">Most Popular</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" class="">■ Creating a language translation model</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" class="">■ Creating a text generator with RNNs</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="">■ Running Faster R-CNN on Ubuntu</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-Caffe-Ubuntu/" class="">■ Installing Caffe on Ubuntu 16.04</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Setting-Up-Python-Environment-For-Computer-Vision-And-Machine-Learning/" class="">■ Installing OpenCV & Keras</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/project/Real-Time-Object-Recognition-part-two/" class="">■ Real time Object Recognition</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Regularization/" class="">■ Regularization</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="">■ Cross Validation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" class="">■ What is Machine Learning?</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Machine Learning Part 6: Logistic Regression">
+    <meta itemprop="description" content="Hello there, I am back with you today. In the 6th post on Machine Learning tutorials series, I will tell you about Logistic Regression, a very important and must-know algorithm. Before I go any further, there is one thing I want you to be clear at first. The algorithm’s name, Logistic Regression, is somehow confusing a little bit, but we are not dealing with a regression problem, but a classification problem.">
+    <meta itemprop="datePublished" content="October 18, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Machine Learning Part 6: Logistic Regression
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  
+	  13 minute read
+	
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<p>Hello there, I am back with you today. In the 6th post on Machine Learning tutorials series, I will tell you about Logistic Regression, a very important and must-know algorithm. Before I go any further, there is one thing I want you to be clear at first. The algorithm’s name, Logistic Regression, is somehow confusing a little bit, but we are not dealing with a regression problem, but a <strong>classification problem</strong>.</p>
+
+<p>But what is the difference between regression problems and classification problems? - You may ask. I am not a statistical expert, and you may not want any detailed academic explanations, so I will make it simply like below.</p>
+
+<p>A regression problem is where you have a <strong>continuous</strong> dataset of label \(y\), and your goal is to make predictions for unlabeled data. Because \(y\) is continuous, it can take any value between a specific range. Concretely, if our problem’s output range is \(1 ~ 10\), then \(y\) can be any value between that range, such as \(1.2, 2.5\) or even \(4.23424324\), etc. A regression problem’s graph will mostly look like the graph I showed you in <a href="https://mahaveer0suthar.github.io/tutorial/Linear-Regression/" target="_blank">Linear Regression</a> tutorial:</p>
+
+<p><img src="/images/tutorials/linear-regression/7.jpg" alt="Update 4" /></p>
+
+<p>A classification problem, as you may guess, is where our labels \(y\) can only take a particular value, or we can say that \(y\) is a discrete dataset. For example, if we want to solve a spam mail detecting problem, obviously we will have only two labels which is either <em>spam</em> or <em>non-spam</em>. Another example, you are a magician who is trying to guess the suit of a randomly picked card, so you only have four choices among Hearts, Diamonds, Clubs and Spades, right? So we are now dealing with a different problem from the one we did before. Our graph will now look like this:</p>
+
+<p><img src="/images/tutorials/logistic-regression/graph_1.png" alt="Graph_1" /></p>
+
+<p>Okay, so I hope you know can see the difference between a regression problem and a classification problem. Let’s see how we will do to deal with a classification problem. To make it easily for you to understand, it is better that we should now consider a two-class classification problem like above.</p>
+
+<h3 id="activation-function">Activation Function</h3>
+
+<p>You still remember how Machine Learning actually works? It is important for any Machine Learning algorithms to have a way to compute the Predictions from the feature data \(X\) which we called Activation Functions. In the case of Linear Regression, the activation function is just as simple as below:</p>
+
+<script type="math/tex; mode=display">h_\theta(X) = \theta_0 + \theta_1X_1 + \theta_2X_2 + \dots + \theta_nX_n</script>
+
+<p>As you can see, the function above is suitable for regression problems, as it doesn’t apply any restriction onto the output. Obviously, this function won’t work well with our classification problem. But we can also see that, Logistic Regression is somehow similar to Linear Regression (that is why there is <em>Regression</em> in its name), so we may be able to solve the Logistic Regression if we somehow find a way to restrict the output value of the function above.</p>
+
+<p>One simple way we can think about is, to use a threshold value. The idea is like below:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+h_\theta(X^{(i)}) = \cases{ 1 & \text{if } h_\theta(X^{(i)}) \ge 0.5 \cr 0 & \text{if } h_\theta(X^{(i)}) \lt 0.5} %]]></script>
+
+<p>And we will obtain a graph like this:</p>
+
+<p><img src="/images/tutorials/logistic-regression/graph_2.png" alt="Graph_2" /></p>
+
+<p>Seems OK, huh? At least we can ensure that the activation function now only outputs \(0\) or \(1\). But in fact, using a threshold directly on regression’s activation function is not a good idea at all. The reason is, now we have a sharp change in our graph, which means that the value of \(y\) will change immediately in an unpredictable way, which results in a bad Model in the end.</p>
+
+<p>So now we know what to do next. We need an activation function which not only restricts the output value but also contains no sharp change. That shouldn’t be a big problem, in fact, we have quite a lot of functions which can satisfy both conditions. And the one which is mostly used is <strong>Sigmoid</strong> function, which has the form as below:</p>
+
+<script type="math/tex; mode=display">g(z)=\frac{1}{1+e^{-z}}</script>
+
+<p>And the graph of sigmoid function looks like this:</p>
+
+<p><img src="/images/tutorials/logistic-regression/graph_3.png" alt="Graph_3" /></p>
+
+<p>Perfect, right? That is exactly what we need. So how are we supposed to apply this to our case. It’s very simple, we just do like below:</p>
+
+<script type="math/tex; mode=display">z = \theta^TX = \theta_0 + \theta_1X_1 + \theta_2X_2 + \dots + \theta_nX_n</script>
+
+<script type="math/tex; mode=display">h_\theta(X) = g(z) = \frac{1}{1+e^{-z}} = \frac{1}{1+e^{-\theta^TX}}</script>
+
+<p>Next, I want to talk a little bit about the output of the function about, \(h_\theta(X)\). \(h_\theta(X)\) is interpreted as the probability that \(y=1\) on input \(X\), which can be expressed in mathematical terms like this:</p>
+
+<script type="math/tex; mode=display">h_\theta(X) = P(y=1|x;\theta)</script>
+
+<p>And obviously, since we always have:</p>
+
+<script type="math/tex; mode=display">P(y=1|x;\theta)+P(y=0|x;\theta)=1</script>
+
+<p>So we can also rewrite the probability that \(y=0\) like this:</p>
+
+<script type="math/tex; mode=display">1 - h_\theta(X) = P(y=0|x;\theta)</script>
+
+<p><strong>The output of activation function is the probability that \(y = 1\).</strong></p>
+
+<p>Why did I emphasize that? Do you still remember that I left one mystery unrevealed in my very first post about <a href="https://mahaveer0suthar.github.io/tutorial/Machine-Learning-Definition/" target="_blank">What is Machine Learning?</a>. I labeled two classes Dog and Not-a-dog, not Dog and Cat, or Dog and Bird either. And the reason is clear now, I think. In a classification problem, the output is usually interpreted as the probability that the tested object belongs to a particular class. Obviously, if one object is not a Dog, then I would rather say that it is Not-a-dog than say that it is a Cat or it is a Bird, right? Although in real world projects, let’s say we have ten classes, then each class will be labeled as a specific name, rather than an obscure name like <em>Not-something</em>, but that’s OK in case you already had some basic understanding about Machine Learning (I will talk about multiclass classification later). And I thought that it would be better to name two classes Dog and Not-a-dog in the very first example on Machine Learning, so that you would make no misunderstanding about what is actually outputted from a Machine Learning Model.</p>
+
+<p>So we have done with sigmoid function, the function which we chose as our Activation Function. To recall a little, sigmoid function is a great choice here because it can satisfy both conditions: restricting the output’s values and ensuring there is no sharp changes in graph.</p>
+
+<h3 id="cost-function">Cost function</h3>
+<p>After choosing the activation function, let’s move to our next target: the Cost Function. As you may remember, the cost function evaluate our Model performance based on the difference between its Predictions and the actual Labels. In the case of Linear Regression, our cost function looks like this:</p>
+
+<script type="math/tex; mode=display">J(\theta)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(X^{(i)})-y^{(i)})^2</script>
+
+<p>Can we use the same cost function in Logistic Regression? The answer is: definitely <strong>NO</strong>. You got the right to ask me why. Well, in the learning process, what the computer tries to do is to minimize the cost function. Therefore, our cost function must be some kind of convex functions so that we can find the minimum by using Gradient Descent. In the case of Logistic Regression, if we use the same cost function like above, we will end up with a non-convex function. And for sure, the computer has no way to find the minimum.</p>
+
+<p>So we are likely to find a new form of cost function which can both evaluate our Model’s performance and tends to converge to some minimum. I don’t want to talk deeper into how they found the appropriate cost function for Logistic Regression because it requires a lot of mathematical explanations. To make it as easily to understand as possible, you can see that our activation function contains an exponential element \(e^{-z}\), and one way to linearize that kind of function is to use logarithm. That is why the cost function for Logistic Regression was defined like below, and called the log-likelyhood cost function or the cross-entropy cost function:</p>
+
+<script type="math/tex; mode=display">J(\theta)=-\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(h_\theta(X^{(i)})) + (1 - y^{(i)})\log(1 - h_\theta(X^{(i)}))]</script>
+
+<p>Let’s talk a little bit about the cost function above. First, note that now we divide the sum by \(\frac{1}{m}\), because our new cost function is no longer a quadratic function. And don’t forget the <strong>minus</strong> sign, either! It’s very easy to explain why there is minus sign there. The logarithm of a number whose value is from \(0\) to \(1\) is a minus number, so adding a minus sign will make sure our cost function will always greater than or equal to \(0\).</p>
+
+<p>Next, you can see that our new defined cost function has two seperate part: \(y^{(i)}\log(h_\theta(X^{(i)}))\) and \((1 - y^{(i)})\log(1 - h_\theta(X^{(i)}))\). Since the Label \(y\) can only be \(0\) or \(1\), so one of the two terms above will be \(0\). So we have a cost function which can cover both two cases: \(y=0\) and \(y=1\). Furthermore, our new cost function can also accumulate the output errors in each case properly, as explained above.</p>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+
+<p>So I have just talked about the cost function used in Logistic Regression problems. After we have a cost function, we will compute Gradien Descent. Do you still remember what Gradien Descent is? We need to compute Gradient Descent in order to update the parameter \(\theta\) (After assuring our cost function is convex, we need a way to go downhill, right?). So, let’s compute Gradient Descent. Our new cost function seems very complicate this time, which you may think that it would take a day to compute all its partial derivatives. Don’t worry, things are not that bad. In fact, computing the log-likelihood cost function’s partial derivatives is very easy, all you have to do is using the <em>chain rule</em> which I mentioned before in earlier post. Writing it our here will make this post long and boring, so I leave it for you, lol. Here, I just want to show you the result. And it may make you surprised. Yeah, it looks just like what we had with Linear Regression:</p>
+
+<ul>
+  <li>For weights (\( \theta_1, \ldots, \theta_n\))</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_j}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)}).x_j^{(i)}</script>
+
+<ul>
+  <li>For bias (\( \theta_0 \))</li>
+</ul>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \theta_0}J(\theta) = \frac{1}{m}\sum_{i=1}^m(h_\theta^{(i)}(x^{(i)})-y^{(i)})</script>
+
+<p>As I mentioned above, you can compute the partial derivatives yourselves (I highly recommend you to do so, though). And with a little patience, I’m quite sure that you will have the same result.</p>
+
+<p>So now you know everything you need to know about Logistic Regression: the sigmoid function, the log-likelihood cost function and its gradient descent. Note that not only Linear Regression and Logistic Regreesion, knowing these three terms also help you understand and use any other Machine Learning algorithms as well (even those complicated algorithms such as Neural Network!).</p>
+
+<h3 id="decision-boundary">Decision Boundary</h3>
+
+<p>I will be more than happy if you are still keeping my page open. I really appreciate your attitude and persistence, too. And we will do something more interesting right now: programming!</p>
+
+<p>But before getting our hands dirty. Let’s consider the figure below:</p>
+
+<p><img src="/images/tutorials/logistic-regression/3d.png" alt="3d" /></p>
+
+<p>I have just prepared some data. This time we will work with two-feature dataset. In practice, it’s normal that our data has a great deal of features (can be up to thousands in case of image data), so working with one-feature data makes it irritating when dealing with some real problems. On the other hand, working with many-feature data when learning (let’s say, data which has more than three features) will make you unable to visualize the result. So, it’s a good idea to use data with two features (or three features) when learning.</p>
+
+<p>So as you saw in the figure above, our data has two features: \(X_1\) and \(X_2\) with the label \(y=0\) or \(y=1\). Since we are dealing with a classification problem, where our label can take a particular value only (in this case \(0\) of \(1\), we don’t need to plot the label \(y\). It would be better if we just plot a graph of \(X_1\) and \(X_2\) only like below:</p>
+
+<p><img src="/images/tutorials/logistic-regression/2d.png" alt="2d" /></p>
+
+<p>So what about \(y\)? We can use colors to indicate different values of \(y\). Doing this way, we can have a better visualization of our data, and make it possible to visualize three-feature data as well.</p>
+
+<p>With the figure above, we can see that our data is linearly distributed, which means we can seperate them out by a straight line. In a classification problem, that straight line is called <strong>Decision Boundary</strong>. Imagine we have drawn a decision boundary to the graph above, then to every new point, if it lies above the decision boundary, then we will label it with blue triangle. Conversely, if the new point lies below the decision boundary, it will become a red circle. Simple, right? A picture is worth a thousand words!</p>
+
+<p>But what is exactly behind the decision boundary? Just to recall you, the value of the activation function \(h_\theta(X)\) is the probability that \(y=1\), we will now define a new variable to hold the prediction made by our Model like below:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+y^{(i)}_{predict} = \cases{ 1 & \text{if } h_\theta(X^{(i)}) \ge 0.5 \cr 0 & \text{if } h_\theta(X^{(i)}) \lt 0.5} %]]></script>
+
+<p>But the activation function is a sigmoid function, which means that:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\cases{ g(z) \ge 0.5 & \text{if } z \ge 0 \cr g(z) < 0.5 & \text{if } z \lt 0} %]]></script>
+
+<p>So we can have the relation between the prediction \(y_{predict}\) and \(\theta^TX\) like this:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+y_{predict} = \cases{ 1  & \text{if } \theta^TX \ge 0 \cr 0 & \text{if } \theta^TX \lt 0} %]]></script>
+
+<p>Now what’s next? How the hell can all of this lead to a decision boundary we need? Well, let’s consider the example below:</p>
+
+<p>Let’s pick some random parameters for our activation function, like \(\theta_0 = -1\), \(\theta_1 = 2\) and \(\theta_2 = 3\). So we will have \(z = -1 + 2X_1 + 3X_2\). Let’s compute the prediction \(y_{predict}\):</p>
+
+<script type="math/tex; mode=display">\cases{y = 1 \; \text{if }  -1 + 2X_1 + 3X_2 \ge 0 \Rightarrow 2X_1 + 3X_2 \ge 1 \cr y = 0 \; \text{if }  -1 + 2X_1 + 3X_2 \lt 0 \Rightarrow 2X_1 + 3X_2 \lt 1}</script>
+
+<p>Let’s visualize the result above:</p>
+
+<p><img src="/images/tutorials/logistic-regression/boundary.png" alt="boundary" /></p>
+
+<p>As you can see, with the constraint above, we can draw a straight line, in this case: the \(2X_1 + 3X_2 - 1 = 0\) line and have it seperate our hyperplane into two parts. The area above the line, which have \(2X_1 + 3X_2 - 1 \ge 0\) is where our prediction \(y_{predict} = 1\) and the other one is where \(y_{predict} = 0\).</p>
+
+<p>So I hope you now understand what decision boundary is. It is a very important concept in classification problems. In the near future, you will see that the decision boundary is not necessarily a straight line. Depending on the algorithm you use, you can achieve a curve decision boundary (as I already shoed you, a curve line is fit the data much more better).</p>
+
+<p>Now, we are ready to code! Let’s first import all the necessary modules:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span></code></pre></figure>
+
+<p>Next, we will create the data to be trained:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">x1_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x1_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x2_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="o">*</span><span class="mi">4</span>
+<span class="n">x2_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">4</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x1_1</span><span class="p">,</span> <span class="n">x1_2</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x2_1</span><span class="p">,</span> <span class="n">x2_2</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span></code></pre></figure>
+
+<p>If you plot the data above, you will get a graph that looks nearly the same as the one above. Now let’s train the Logistic Regression model:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></code></pre></figure>
+
+<p>It should take no longer than one second to complete training. Let’s see how well our Model performs on the training dataset:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="mf">0.98</span></code></pre></figure>
+
+<p>Note that your result may vary, since the values of \(X_2\) were randomly initialized. I will omit the overfitting problem in this tutorial for simplicity. And similar to Linear Regression, after finishing training, the Logistic Regression object now contains the final parameters in <em>coef_</em> and <em>intercept_</em> attributes, we will use them to draw our decision boundary:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span> <span class="o">-</span> <span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">X1_min</span><span class="p">,</span> <span class="n">X1_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+<span class="n">X2_min</span><span class="p">,</span> <span class="n">X2_max</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'rainbow'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s">'g-'</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">'X1'</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">'X2'</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">X1_min</span><span class="p">,</span> <span class="n">X1_max</span><span class="p">])</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">X2_min</span><span class="p">,</span> <span class="n">X2_max</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p>We will obtain a decision boundary like below, note that your result may be different from mine:</p>
+
+<p><img src="/images/tutorials/logistic-regression/fit.png" alt="fit" /></p>
+
+<p>As you can see, the final decision boundary somehow can seperate the blue triangles and the red circles pretty well. And obviously, we see that there is much room for improvement, but I will leave it for the later post. After typing some codes and visualizing the result, I hope you now know how to implement your code to use the Logistic Regression algorithm.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>So today, we have talked about Logistic Regression. We talked about the difference between a regression problem and a classification problem. We talked about the activation function, the cost function used in Logistic Regression and how to compute its gradient descent as well. In the next post, I will continue with <strong>Cross Validation</strong>, another very important technique that you must know to deal with Overfitting problem, as you will use that technique nearly in every Machine Learning problem you may face in the future! So stay updated, and I will be back with you soon!</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#classification" class="page__taxonomy-item" rel="tag">classification</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#essential" class="page__taxonomy-item" rel="tag">essential</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#logistic-regression" class="page__taxonomy-item" rel="tag">logistic-regression</a><span class="sep">, </span>
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tags/#machine-learning" class="page__taxonomy-item" rel="tag">machine-learning</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/categories/#tutorial" class="page__taxonomy-item" rel="tag">Tutorial</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-18T00:00:00+05:30">October 18, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/mahaveer0suthar.github.io/tutorial/Logistic-Regression/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Running-Faster-RCNN-Ubuntu/" class="pagination--pager" title="Compiling and Running Faster R-CNN on Ubuntu (CPU Mode)
+">Previous</a>
+    
+    
+      <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/Cross-Validation/" class="pagination--pager" title="Machine Learning Part 7: Cross Validation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">Leave a Comment</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/tutorial/What-I-talk-about-Tensorflow/" rel="permalink">What I talk when I talk about Tensorflow
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-11-02T00:00:00+05:30">November 02, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Some of my collegues, as well as many of my readers told me that they had problems using Tensorflow for their projects. Something like this:
+
+</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/installing-nvidia-docker/docker-logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Installing-NVIDIA-Docker-On-Ubuntu-16.04/" rel="permalink">Installing NVIDIA Docker On Ubuntu 16.04
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-02-04T00:00:00+05:30">February 04, 2018</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">Hey guys, it has been quite a long while since my last blog post (for almost a year, I guess). Today, I am going to tell you about something that I wish I ha...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/tensorflow-install/tensorflow_logo.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Tensorflow-Installation/" rel="permalink">Tensorflow Implementation Note: Installing Tensorflow and Keras on Windows
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-05-09T00:00:00+05:30">May 09, 2017</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello everyone, it’s been a long long while, hasn’t it? I was busy fulfilling my job and literally kept away from my blog. But hey, if this takes any longe...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/sequence-to-sequence/repeated_vector.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Sequence-To-Sequence/" rel="permalink">Creating A Language Translation Model Using Sequence To Sequence Learning Approach
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-12-20T00:00:00+05:30">December 20, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys. It’s been quite a long while since my last blog post. It may sound like an excuse, but I’ve been struggling with finding a new place to move in...</p>
+  </article>
+</div>
+
+          
+        
+          
+            
+
+
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "http://localhost:4000/mahaveer0suthar.github.io/images/projects/creating-text-generator-using-recurrent-neural-network/LSTM.png"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/mahaveer0suthar.github.io/project/Creating-Text-Generator-Using-Recurrent-Neural-Network/" rel="permalink">Creating A Text Generator Using Recurrent Neural Network
+</a>
+      
+    </h2>
+
+    
+      <p class="page__date page__meta"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-11-14T00:00:00+05:30">November 14, 2016</time></p>
+    
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Hello guys, it’s been another while since my last post, and I hope you’re all doing well with your own projects. I’ve been kept busy with my own stuff, too...</p>
+  </article>
+</div>
+
+          
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- New Ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3852793730107162"
+     data-ad-slot="4068904466"
+     data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/mahaveer0suthar"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="http://localhost:4000/mahaveer0suthar.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Mahaveer Suthar. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="http://localhost:4000/mahaveer0suthar.github.io/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84343367-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'mahaveer0suthar';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>
