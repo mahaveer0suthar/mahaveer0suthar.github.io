@@ -10,21 +10,23 @@ sitemap: true
 
 ## Education
 
-### Master of Technology - Artificial Intelligence
+* **Master of Technology - Artificial Intelligence**
 
-**Indian Institute of Information Technology & Management, Gwalior, India**
-**Major : Computer Vision & Artificial Intelligence**
-* Thesis : -
-    + Title :  ***“Fast Facial Identification and Recognition both 1:N and 1:1”***
-    + Advisor -  **Prof. Rajendra Sahu (Director)**
+    + ***Indian Institute of Information Technology & Management, Gwalior, India***
 
-### Bachelor of Technology - Information Technology
+    + Major : Computer Vision & Artificial Intelligence
 
-**Indian Institute of Information Technology & Management, Gwalior, India**
+    + Thesis : -
+        - Title :  ***“Fast Facial Identification and Recognition both 1:N and 1:1”***
+        - Advisor -  **Prof. Rajendra Sahu (Director)**
 
-* Thesis : -
-    + Title :  ***Depth Estimation using RGB Imagery***
-    + Advisor -  **Prof. Rajendra Sahu**
-* Programming Coursework : ***Algorithm & Data Structure, Operating System, Network, Computer Vision,NLP***
+* **Bachelor of Technology - Information Technology**
+
+    + ***Indian Institute of Information Technology & Management, Gwalior, India**
+
+    + Thesis : -
+        - Title :  ***Depth Estimation using RGB Imagery***
+        - Advisor -  **Prof. Rajendra Sahu**
+    + Programming Coursework : ***Algorithm & Data Structure, Operating System, Network, Computer Vision,NLP***
 
 

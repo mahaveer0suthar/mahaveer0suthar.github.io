@@ -10,8 +10,9 @@ sitemap: true
 
 ## Experience
 
-**Senior Computer Vision Engineer** 
-***Attentive AI*** --- ***July 2019 - Current***
+* **Senior Computer Vision Engineer**
+    + ***Attentive AI*** 
+    + ***July 2019 - Current***
 
 [***Attentive AI***](www.attentive.ai) create meaningful insights from remote sensing data using deep learning and
 computer vision.(like road and building footprint extraction from satellite imagery
@@ -24,8 +25,9 @@ computer vision.(like road and building footprint extraction from satellite imag
 
 **Leveraged Knowledge** in Tem Management, Docker, Docker-Compose, Google Compute Engine, GDAL,Faster-RCNN, RFCN Architecture , Utilized Multithreading and Multiprocessing.  
 
-**Computer Vision Engineer** 
-***Attentive AI*** --- ***July 2018 - July 2019***
+* **Computer Vision Engineer** 
+    + ***Attentive AI*** 
+    +  ***July 2018 - July 2019***
 
 * Responsible for developing different type of Vision Systems for Satellite Imagery Application. 
 * Developed a crop classification system from satellite imagery using Sentinel-2 data, and cadastral data from the state government of Madhya Pradesh 
@@ -35,7 +37,9 @@ computer vision.(like road and building footprint extraction from satellite imag
 
 **Leveraged Knowledge** in Git, Tensorflow, PyTorch, GDAL, D-LinkNet Architecture, Worked on AWS-EC2-P3 GPU Servers.
 
-**Deep Learning Researcher** ------------------------ ***Prof. Rajendra Sahu - IIITM Gwalior*** ------------------------ ***Jan 2018 – June 2018***
+* **Deep Learning Researcher** 
+    + ***Prof. Rajendra Sahu - IIITM Gwalior*** 
+    + ***Jan 2018 – June 2018***
 [Prof. Rajendra Sahu](http://rajendrasahu.me/) has been associated with teaching profession for the past 30 years and has been closely involved in industrial consultancy projects. He is also Secretary of System Dynamic of India.
 
 * Responsible for plan, design, and conduct research to aid in interpretation of Computer Vision analysis of RGB Imagery in context of Depth estimation.
@@ -45,7 +49,9 @@ computer vision.(like road and building footprint extraction from satellite imag
 
 **Leveraged Knowledge** in Research Methodology, Data Analysis, Presentation, Python, Transfer learning, Multiband Image Analysis, Guided Filter Architecture.
 
-**Research Internship** ------------------------ ***Prof. Joy Dip Shar - IIITM Gwalior*** ------------------------ ***Jan 2018 – June 2018***
+* **Research Internship** 
+    + ***Prof. Joy Dip Shar - IIITM Gwalior*** 
+    + ***Jan 2018 – June 2018***
 Prof. Joy Dip Dhar has been associated with teaching profession for the past 20 years and has been closely involved in Big Data and Data Mining research projects.
 
 * Responsible for plan, design, and conduct Literature review research on “Understanding Brainwaves and effect of music on brainwaves”.
@@ -54,7 +60,9 @@ Prof. Joy Dip Dhar has been associated with teaching profession for the past 20 
 
 **Leveraged Knowledge** in Research Methodology, Brainwaves, Presentation, Deep Sleep Patterns and collaboration.
 
-**Software Engineer Internship** ------------------------ ***Technology Innovation & Incubation Center*** ------------------------ ***May 2016 - June 2016***
+* **Software Engineer Internship** 
+    + ***Technology Innovation & Incubation Center*** 
+    + ***May 2016 - June 2016***
 [TIIC](http://www.tiiciiitm.com/) is to be an effective interface b/w industry & Academia to foster, promote and sustain commercialization of science & technology in technology in institute for mutual benefits.
 
 * Responsible for building [Virtual Tour](http://tiiciiitm.com/virtual_tour/VTABVIIITM.html) of Indian Institute of Information Technology & Management Gwalior.
