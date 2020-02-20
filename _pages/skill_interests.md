@@ -11,14 +11,9 @@ sitemap: true
 
 ## Skills
 
-+ **Programming Languages**
-    * Python (Numpy and TensorFlow)
-    * JavaScript (React and Node.js)
-    * C++
-    * SystemVerilog (Hardware Description Language)
-
-
-+ **Tools, Frameworks** 
++ **Programming Languages and Frameworks** 
+    * Python
+    * React, Node.js
     * Tensorflow, PyTorch, Keras, C++
     * Docker, Apache Kafka, Caffe2
     * OpenCV, NumPy, Scikit, GrabCut, GDAL
