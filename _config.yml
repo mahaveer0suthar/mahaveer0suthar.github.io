@@ -48,14 +48,14 @@ atom_feed:
   path                   : # blank (default) uses feed.xml
 
 # SEO Related
-google_site_verification :
+google_site_verification : ho8trrB9Qh7KHvxD-AUywATdPAOr6EJQ3pQbX6bfZFA
 bing_site_verification   :
 alexa_site_verification  :
 yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               :
+  username               :mahaveer0suthar
 facebook:
   username               :
   app_id                 :
@@ -72,7 +72,7 @@ social:
 analytics:
   provider               : "google-universal" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id          : "UA-84343367-1"
+    tracking_id          : "UA-137799718-1"
 
 
 # Site Author
@@ -82,7 +82,7 @@ author:
   bio              : "Senior Deep Learning Engineer"
   location         : "New Delhi, India"
   email            : "mahaveer0suthar@gmail.com"
-  uri              :
+  uri              : "https://msveer.com"
   bitbucket        :
   codepen          :
   dribbble         :
