@@ -3,14 +3,22 @@ main:
   - title: "About"
     url: /about/
 
+  - title: "Projects"
+    url: https://mahaveer0suthar.github.io/portfolio/
+    
   - title: "Professional Experience"
     url: /experience/
+
+  - title: "Skills & Areas of Interests"
+    url: /skills/
+
+  - title: "Education"
+    url: /education/
 
   - title: "Tutorials"
     url: https://mahaveer0suthar.github.io/tutorials/
     
-  - title: "Projects"
-    url: https://mahaveer0suthar.github.io/portfolio/
+
 posts:
   - title: Most Popular
     children:
